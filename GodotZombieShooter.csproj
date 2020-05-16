@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Tools</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{91DA37C8-7861-4721-8B7E-E09B6759BC21}</ProjectGuid>
+    <ProjectGuid>{438E420C-1993-46EE-A625-8FC339FD73E9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <OutputPath>.mono\temp\bin\$(Configuration)</OutputPath>
     <RootNamespace>GodotZombieShooter</RootNamespace>
@@ -53,15 +53,10 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="properties\assembly-info.cs" />
-    <Compile Include="src\actors\zombie\zombie-proxy.cs" />
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <ProjectReference Include="godot-zombie-shooter-domain.fsproj">
-      <Project>{6d4ece5b-47f0-41f8-ac0c-2a5e73d80a29}</Project>
-      <Name>godot-zombie-shooter-domain</Name>
-    </ProjectReference>
+    <Compile Include="src\Actors\Test\TestProxy.cs" />
+    <Compile Include="src\Properties\AssemblyInfo.cs" />
+    <Compile Include="src\Actors\Player\Player.cs" />
+    <Compile Include="src\Actors\Zombie\ZombieProxy.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

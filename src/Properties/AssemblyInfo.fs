@@ -1,4 +1,4 @@
-﻿namespace godot_zombie_shooter_domain.AssemblyInfo
+﻿namespace GodotZombieShooter.Domain.AssemblyInfo
 
 open System.Reflection
 open System.Runtime.CompilerServices
@@ -7,11 +7,11 @@ open System.Runtime.InteropServices
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[<assembly: AssemblyTitle("godot-zombie-shooter-domain")>]
+[<assembly: AssemblyTitle("GodotZombieShooter.Domain")>]
 [<assembly: AssemblyDescription("")>]
 [<assembly: AssemblyConfiguration("")>]
 [<assembly: AssemblyCompany("")>]
-[<assembly: AssemblyProduct("godot-zombie-shooter-domain")>]
+[<assembly: AssemblyProduct("GodotZombieShooter.Domain")>]
 [<assembly: AssemblyCopyright("Copyright ©  2020")>]
 [<assembly: AssemblyTrademark("")>]
 [<assembly: AssemblyCulture("")>]
@@ -22,7 +22,7 @@ open System.Runtime.InteropServices
 [<assembly: ComVisible(false)>]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[<assembly: Guid("6d4ece5b-47f0-41f8-ac0c-2a5e73d80a29")>]
+[<assembly: Guid("21cecc19-8dc3-4a79-9ae7-d1d82311779f")>]
 
 // Version information for an assembly consists of the following four values:
 //
