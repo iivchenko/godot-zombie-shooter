@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/actors/zombie/zombie.tscn" type="PackedScene" id=1]
+
+[node name="LevelSanbox" type="Node2D"]
+position = Vector2( 220.979, 135.315 )
+
+[node name="Zombie" parent="." instance=ExtResource( 1 )]

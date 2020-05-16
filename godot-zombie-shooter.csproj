@@ -54,10 +54,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="properties\assembly-info.cs" />
+    <Compile Include="src\actors\zombie\zombie-proxy.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\actors\zombies\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="godot-zombie-shooter-domain.fsproj">
       <Project>{6d4ece5b-47f0-41f8-ac0c-2a5e73d80a29}</Project>

@@ -18,6 +18,17 @@ _global_script_class_icons={
 config/name="godot-zombie-shooter"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/width=1920
+window/size/height=1080
+
+[layer_names]
+
+2d_physics/layer_1="world"
+2d_physics/layer_2="player"
+2d_physics/layer_3="enemies"
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
