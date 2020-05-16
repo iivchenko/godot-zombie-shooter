@@ -352,3 +352,5 @@ MigrationBackup/
 # Godot
 .import/
 .mono/
+
+Thumbs.db
