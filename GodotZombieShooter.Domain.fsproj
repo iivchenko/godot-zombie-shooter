@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="src\Properties\AssemblyInfo.fs" />
     <Compile Include="src\Actors\Player\Player.fs" />
+    <Compile Include="src\Actors\Zombie\Zombie.fs" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
