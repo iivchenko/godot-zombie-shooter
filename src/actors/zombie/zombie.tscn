@@ -9,6 +9,8 @@ radius = 11.5699
 height = 20.4317
 
 [node name="Zombie" type="KinematicBody2D"]
+collision_layer = 4
+collision_mask = 9
 script = ExtResource( 3 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]

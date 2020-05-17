@@ -2,18 +2,40 @@
 
 open Godot
 
-type public Player () =
+type public Player () as this =
     inherit KinematicBody2D ()
 
-    let mutable speed = 100.0f
+    [<Export>] 
+    let mutable hitFactory : PackedScene = null
+
+    let target = lazy(this.GetNode<Sprite>(NodePath("TargetRay/Target")))
+    let targetRay = lazy(this.GetNode<RayCast2D>(NodePath("TargetRay")))
+
+    let mutable maxSpeed = 100.0f
 
     [<Export>]
-    member this.Speed
-        with get () = speed
-        and set (value) = speed <- value
+    member _.MaxSpeed
+        with get () = maxSpeed
+        and set (value) = maxSpeed <- value
 
+    override _._Ready() = Input.SetMouseMode(Input.MouseMode.Hidden)
 
-    // move:
-    // get input
-    // calculate direction
-    // apply move
+    override _._Process(_: float32) = 
+
+        target.Value.GlobalPosition <- this.GetGlobalMousePosition()
+        targetRay.Value.CastTo <- target.Value.Position
+
+        match Input.IsActionJustPressed("shoot") with 
+        | true -> 
+            let hit = hitFactory.Instance() :?> Particles2D;
+            hit.GlobalPosition <- if targetRay.Value.IsColliding() then targetRay.Value.GetCollisionPoint() else target.Value.GlobalPosition
+            base.GetTree().CurrentScene.AddChild(hit)
+            hit.Emitting <- true
+        | _ -> ()
+
+    override this._PhysicsProcess (_: float32) =
+        
+        let direction = Vector2(Input.GetActionStrength("move_right") - Input.GetActionStrength("move_left"), Input.GetActionStrength("move_down") - Input.GetActionStrength("move_up")) 
+        let velocity = direction * maxSpeed
+        this.LookAt(this.GetGlobalMousePosition())
+        this.MoveAndSlide(velocity) |> ignore

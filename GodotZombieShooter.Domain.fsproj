@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>21cecc19-8dc3-4a79-9ae7-d1d82311779f</ProjectGuid>
     <OutputType>Library</OutputType>
-	 <OutputPath>.mono\temp\bin\$(Configuration)</OutputPath>
+    <OutputPath>.mono\temp\bin\$(Configuration)</OutputPath>
     <RootNamespace>GodotZombieShooter.Domain</RootNamespace>
     <AssemblyName>GodotZombieShooter.Domain</AssemblyName>
     <UseStandardResourceNames>true</UseStandardResourceNames>
@@ -15,7 +15,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <WarningsAsErrors>3239;$(WarningsAsErrors)</WarningsAsErrors>
     <Name>GodotZombieShooter.Domain</Name>
-	<ApiConfiguration Condition=" '$(Configuration)' != 'Release' ">Debug</ApiConfiguration>
+    <ApiConfiguration Condition=" '$(Configuration)' != 'Release' ">Debug</ApiConfiguration>
     <ApiConfiguration Condition=" '$(Configuration)' == 'Release' ">Release</ApiConfiguration>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -53,21 +53,22 @@
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
     <Compile Include="src\Properties\AssemblyInfo.fs" />
+    <Compile Include="src\Actors\Player\Player.fs" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FSharp.Core">
-      <HintPath>..\packages\FSharp.Core.4.7.0\lib\net45\FSharp.Core.dll</HintPath>
+      <HintPath>$(ProjectDir)\packages\FSharp.Core.4.7.0\lib\net45\FSharp.Core.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.ValueTuple">
-      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net47\System.ValueTuple.dll</HintPath>
+      <HintPath>$(ProjectDir)\packages\System.ValueTuple.4.4.0\lib\net47\System.ValueTuple.dll</HintPath>
       <Private>True</Private>
     </Reference>
-	<Reference Include="GodotSharp">
+    <Reference Include="GodotSharp">
       <HintPath>$(ProjectDir)\.mono\assemblies\$(ApiConfiguration)\GodotSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>

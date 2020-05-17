@@ -53,10 +53,15 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\Actors\Test\TestProxy.cs" />
+    <Compile Include="src\Actors\Player\PlayerProxy.cs" />
     <Compile Include="src\Properties\AssemblyInfo.cs" />
-    <Compile Include="src\Actors\Player\Player.cs" />
     <Compile Include="src\Actors\Zombie\ZombieProxy.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="GodotZombieShooter.Domain.fsproj">
+      <Project>{21cecc19-8dc3-4a79-9ae7-d1d82311779f}</Project>
+      <Name>GodotZombieShooter.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

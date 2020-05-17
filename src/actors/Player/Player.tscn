@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/sprites/topdown-zombie-shooter-pack/main-blue/man-blue-gun.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/topdown-zombie-shooter-pack/main-blue/man-blue-reload.png" type="Texture" id=2]
-[ext_resource path="res://src/Actors/Player/Player.cs" type="Script" id=3]
+[ext_resource path="res://src/Actors/Player/PlayerProxy.cs" type="Script" id=3]
+[ext_resource path="res://assets/sprites/ui-space-expansion-pack/crossair-red.png" type="Texture" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 16.0472
@@ -10,6 +11,10 @@ height = 11.1592
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -3.00828, 0 )
+shape = SubResource( 1 )
 
 [node name="State" type="Node2D" parent="."]
 
@@ -20,6 +25,12 @@ texture = ExtResource( 1 )
 visible = false
 texture = ExtResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -3.00828, 0 )
-shape = SubResource( 1 )
+[node name="TargetRay" type="RayCast2D" parent="."]
+position = Vector2( 25, 10 )
+enabled = true
+cast_to = Vector2( 50, 0 )
+collision_mask = 4
+
+[node name="Target" type="Sprite" parent="TargetRay"]
+position = Vector2( -25, -10 )
+texture = ExtResource( 4 )
