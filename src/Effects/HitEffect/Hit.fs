@@ -6,6 +6,7 @@ type public Hit () as this =
     inherit Area2D ()
 
     let mutable damage = 25
+    let mutable enabled = true
 
     let effect = lazy(this.GetNode<Particles2D>(NodePath("Effect")))
 
@@ -14,9 +15,17 @@ type public Hit () as this =
         with get () = damage
         and set (value) = damage <- value
 
-    member _.Hit() = effect.Value.Emitting <- true
+    member this.Hit() =
+        effect.Value.Emitting <- true
 
-    member _.OnHitBodyEntered(body: Node2D) =
+        async {
+            while effect.Value.Emitting do ()
+            this.QueueFree()
+        } |> Async.StartAsTask |> ignore
+
+    member this.OnHitBodyEntered(body: obj) =
         match body with 
-        | (:? IHittable as target) -> target.Hit(damage)
+        | (:? IHittable as target) when enabled -> 
+            target.Hit(damage)
+            enabled <- false
         | _ -> ()

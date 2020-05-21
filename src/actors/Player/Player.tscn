@@ -30,8 +30,9 @@ texture = ExtResource( 2 )
 position = Vector2( 25, 10 )
 enabled = true
 cast_to = Vector2( 50, 0 )
-collision_mask = 4
+collision_mask = 5
 
 [node name="Target" type="Sprite" parent="TargetRay"]
 position = Vector2( -25, -10 )
+z_index = 100
 texture = ExtResource( 4 )

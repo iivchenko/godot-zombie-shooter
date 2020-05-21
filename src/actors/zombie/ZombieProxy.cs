@@ -1,6 +1,6 @@
 namespace GodotZombieShooter
 {
-    public sealed class ZombieProxy : Zombie
-    {
-    }
+	public sealed class ZombieProxy : Zombie
+	{
+	}
 }

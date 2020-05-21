@@ -1,6 +1,6 @@
 namespace GodotZombieShooter
 {
-    public sealed class HitProxy : Hit
-    {
-    }
+	public sealed class HitProxy : Hit
+	{
+	}
 }
