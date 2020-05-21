@@ -27,10 +27,10 @@ type public Player () as this =
 
         match Input.IsActionJustPressed("shoot") with 
         | true -> 
-            let hit = hitFactory.Instance() :?> Particles2D;
+            let hit = hitFactory.Instance() :?> Hit;
             hit.GlobalPosition <- if targetRay.Value.IsColliding() then targetRay.Value.GetCollisionPoint() else target.Value.GlobalPosition
             base.GetTree().CurrentScene.AddChild(hit)
-            hit.Emitting <- true
+            hit.Hit()
         | _ -> ()
 
     override this._PhysicsProcess (_: float32) =

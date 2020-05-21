@@ -23,6 +23,10 @@ config/icon="res://icon.png"
 window/size/width=1920
 window/size/height=1080
 
+[editor_plugins]
+
+enabled=PoolStringArray( "mono_debugger" )
+
 [input]
 
 move_up={
@@ -56,6 +60,10 @@ shoot={
 2d_physics/layer_1="world"
 2d_physics/layer_2="player"
 2d_physics/layer_3="enemies"
+
+[mono]
+
+debugger_agent/wait_timeout=10000
 
 [rendering]
 
