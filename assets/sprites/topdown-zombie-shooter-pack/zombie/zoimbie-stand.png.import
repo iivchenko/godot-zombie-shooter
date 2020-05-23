@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/zoimbie-stand.png-74987bb295b9a62f40c8fb349e2de2e8.stex"
+path="res://.import/zoimbie-stand.png-e7aa1e0515640fa49df6183c3c4d06aa.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/topdown-zombie-shooter-pack/zombie/zoimbie-stand.png"
-dest_files=[ "res://.import/zoimbie-stand.png-74987bb295b9a62f40c8fb349e2de2e8.stex" ]
+source_file="res://assets/Sprites/topdown-zombie-shooter-pack/zombie/zoimbie-stand.png"
+dest_files=[ "res://.import/zoimbie-stand.png-e7aa1e0515640fa49df6183c3c4d06aa.stex" ]
 
 [params]
 

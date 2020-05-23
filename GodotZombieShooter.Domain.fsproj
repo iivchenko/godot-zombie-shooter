@@ -58,6 +58,7 @@
     <Compile Include="src\Actors\Player\Player.fs" />
     <Compile Include="src\Actors\Zombie\Zombie.fs" />
     <Compile Include="src\Objects\Spawner\Spawner.fs" />
+    <Compile Include="src\MainMenu\MainMenu\MainMenu.fs" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

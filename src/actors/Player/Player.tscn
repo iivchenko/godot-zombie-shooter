@@ -1,11 +1,13 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://assets/sprites/topdown-zombie-shooter-pack/main-blue/man-blue-gun.png" type="Texture" id=1]
-[ext_resource path="res://assets/sprites/topdown-zombie-shooter-pack/main-blue/man-blue-reload.png" type="Texture" id=2]
+[ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/main-blue/man-blue-gun.png" type="Texture" id=1]
+[ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/main-blue/man-blue-reload.png" type="Texture" id=2]
 [ext_resource path="res://src/Actors/Player/PlayerProxy.cs" type="Script" id=3]
-[ext_resource path="res://assets/sprites/ui-space-expansion-pack/crossair-red.png" type="Texture" id=4]
+[ext_resource path="res://assets/Sprites/ui-space-expansion-pack/crossair-red.png" type="Texture" id=4]
 [ext_resource path="res://assets/Sounds/Gun/Shot/SniperShot.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/Sounds/Footstep/Grass/GrassFootStep.wav" type="AudioStream" id=6]
+
+
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 16.0472
