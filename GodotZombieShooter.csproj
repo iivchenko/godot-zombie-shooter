@@ -53,6 +53,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\Actors\IvanPavlovich\IvanPavlovichProxy.cs" />
     <Compile Include="src\Actors\Player\PlayerProxy.cs" />
     <Compile Include="src\Actors\Professor\ProfessorProxy.cs" />
     <Compile Include="src\Effects\HitEffect\HitProxy.cs" />

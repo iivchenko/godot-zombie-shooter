@@ -4,14 +4,12 @@
 [ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/zombie/zoimbie-hold.png" type="Texture" id=2]
 [ext_resource path="res://src/Actors/Zombie/ZombieProxy.cs" type="Script" id=3]
 
-
-
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 11.5699
 height = 20.4317
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 1000.0
+radius = 300.0
 
 [node name="Zombie" type="KinematicBody2D"]
 collision_layer = 4

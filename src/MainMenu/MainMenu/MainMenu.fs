@@ -11,6 +11,9 @@ type public MainMenu () as this =
     [<Export>]
     let mutable NextScene = ""
 
+    override _._Ready() = 
+         Input.SetMouseMode(Input.MouseMode.Visible)
+
     member this.OnStartPressed() = 
         buttonClick.Value.Play()
         this.GetTree().ChangeScene(NextScene)
