@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=8 format=2]
+[gd_resource type="Theme" load_steps=9 format=2]
 
 [ext_resource path="res://assets/KenneyUi/Sprites/blue_button01.png" type="Texture" id=1]
 [ext_resource path="res://assets/KenneyUi/Sprites/blue_button00.png" type="Texture" id=2]
@@ -20,6 +20,24 @@ region_rect = Rect2( 0, 0, 190, 49 )
 texture = ExtResource( 1 )
 region_rect = Rect2( 0, 0, 190, 45 )
 
+[sub_resource type="StyleBoxFlat" id=5]
+content_margin_left = 5.0
+content_margin_right = 5.0
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color( 1, 1, 1, 0.705882 )
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color( 1, 1, 1, 1 )
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color( 0, 0, 0, 1 )
+
 [sub_resource type="DynamicFont" id=4]
 size = 32
 font_data = ExtResource( 3 )
@@ -37,3 +55,4 @@ Button/styles/focus = null
 Button/styles/hover = SubResource( 1 )
 Button/styles/normal = SubResource( 2 )
 Button/styles/pressed = SubResource( 3 )
+Panel/styles/panel = SubResource( 5 )

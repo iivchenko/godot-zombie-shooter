@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\Actors\Player\PlayerProxy.cs" />
+    <Compile Include="src\Actors\Professor\ProfessorProxy.cs" />
     <Compile Include="src\Effects\HitEffect\HitProxy.cs" />
     <Compile Include="src\MainMenu\MainMenuProxy.cs" />
     <Compile Include="src\Objects\Spawner\SpawnerProxy.cs" />
