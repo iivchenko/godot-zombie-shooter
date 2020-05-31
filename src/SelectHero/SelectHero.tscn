@@ -13,9 +13,9 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -4.4044
-margin_top = -2.43497
+margin_top = -3.63413
 margin_right = -4.40442
-margin_bottom = -2.43494
+margin_bottom = -3.63416
 theme = ExtResource( 2 )
 script = ExtResource( 5 )
 __meta__ = {
@@ -100,6 +100,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/Tarchavka"]
+margin_left = -144.194
+margin_top = -20.6848
+margin_right = -19.1938
+margin_bottom = 15.3152
+text = "Тарчавка"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Emilio" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
 margin_left = 56.0
 margin_right = 105.0
@@ -115,6 +125,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 hint_tooltip = "Еміліо"
 color = Color( 0.854902, 0, 0, 0.227451 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/Emilio"]
+margin_left = 55.4591
+margin_top = -22.7832
+margin_right = 145.459
+margin_bottom = 13.2168
+text = "Еміліо"
 __meta__ = {
 "_edit_use_anchors_": false
 }
