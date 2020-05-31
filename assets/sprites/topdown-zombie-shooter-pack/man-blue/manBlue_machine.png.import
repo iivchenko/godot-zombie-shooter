@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/man-blue-reload.png-3da901465b4818d76a56dc3ac2a57e08.stex"
+path="res://.import/manBlue_machine.png-dae275a76d6861604ec5eb78a5846556.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Sprites/topdown-zombie-shooter-pack/main-blue/man-blue-reload.png"
-dest_files=[ "res://.import/man-blue-reload.png-3da901465b4818d76a56dc3ac2a57e08.stex" ]
+source_file="res://assets/Sprites/topdown-zombie-shooter-pack/man-blue/manBlue_machine.png"
+dest_files=[ "res://.import/manBlue_machine.png-dae275a76d6861604ec5eb78a5846556.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/man-blue-gun.png-71e32efd1c80ffc7f8af083ef4d39632.stex"
+path="res://.import/manBlue_hold.png-cbe3cc6f630e7c21c5391e17c31dd5f9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Sprites/topdown-zombie-shooter-pack/main-blue/man-blue-gun.png"
-dest_files=[ "res://.import/man-blue-gun.png-71e32efd1c80ffc7f8af083ef4d39632.stex" ]
+source_file="res://assets/Sprites/topdown-zombie-shooter-pack/man-blue/manBlue_hold.png"
+dest_files=[ "res://.import/manBlue_hold.png-cbe3cc6f630e7c21c5391e17c31dd5f9.stex" ]
 
 [params]
 
