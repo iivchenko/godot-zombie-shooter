@@ -52,6 +52,7 @@
   </PropertyGroup>
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
+    <Compile Include="src\Global.fs" />
     <Compile Include="src\IHittable.fs" />
     <Compile Include="src\IInteractable.fs" />
     <Compile Include="src\Properties\AssemblyInfo.fs" />
@@ -62,6 +63,8 @@
     <Compile Include="src\Actors\IvanPavlovich\IvanPavlovich.fs" />
     <Compile Include="src\Objects\Spawner\Spawner.fs" />
     <Compile Include="src\MainMenu\MainMenu\MainMenu.fs" />
+    <Compile Include="src\SelectHero\SelectHero.fs" />
+    <Compile Include="src\Level\Level.fs" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

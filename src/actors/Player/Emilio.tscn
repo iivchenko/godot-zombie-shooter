@@ -1,45 +1,63 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/main-blue/man-blue-gun.png" type="Texture" id=1]
-[ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/main-blue/man-blue-reload.png" type="Texture" id=2]
+[ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/man-blue/manBlue_machine.png" type="Texture" id=1]
+[ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/man-blue/manBlue_silencer.png" type="Texture" id=2]
 [ext_resource path="res://src/Actors/Player/PlayerProxy.cs" type="Script" id=3]
 [ext_resource path="res://assets/Sprites/ui-space-expansion-pack/crossair-red.png" type="Texture" id=4]
 [ext_resource path="res://assets/Sounds/Gun/Shot/SniperShot.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/Sounds/Footstep/Grass/GrassFootStep.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/man-blue/manBlue_reload.png" type="Texture" id=7]
+[ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/man-blue/manBlue_gun.png" type="Texture" id=8]
+[ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/man-blue/manBlue_stand.png" type="Texture" id=9]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 16.0472
+radius = 15.1513
 height = 11.1592
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 2.24692
 height = 5.97339
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Emilio" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 3 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -3.00828, 0 )
+[node name="Body" type="CollisionShape2D" parent="."]
+position = Vector2( -3.18334, 0.962862 )
 shape = SubResource( 1 )
 
 [node name="State" type="Node2D" parent="."]
 
 [node name="Stand" type="Sprite" parent="State"]
+texture = ExtResource( 9 )
+
+[node name="SimpleGun" type="Sprite" parent="State"]
+visible = false
+position = Vector2( 4.90622, 0 )
+texture = ExtResource( 8 )
+
+[node name="GoodGun" type="Sprite" parent="State"]
+visible = false
+position = Vector2( 8.39878, 0.249468 )
+texture = ExtResource( 2 )
+
+[node name="MachineGun" type="Sprite" parent="State"]
+visible = false
+position = Vector2( 5.40516, 0 )
 texture = ExtResource( 1 )
 
 [node name="Reload" type="Sprite" parent="State"]
 visible = false
-texture = ExtResource( 2 )
+texture = ExtResource( 7 )
 
 [node name="TargetRay" type="RayCast2D" parent="."]
-position = Vector2( 25, 10 )
+position = Vector2( 30.4052, 9.33475 )
 enabled = true
 cast_to = Vector2( 50, 0 )
 collision_mask = 5
 
 [node name="Target" type="Sprite" parent="TargetRay"]
-position = Vector2( -25, -10 )
+position = Vector2( 57.8236, 0.145063 )
 z_index = 100
 texture = ExtResource( 4 )
 
@@ -59,8 +77,8 @@ monitorable = false
 collision_layer = 0
 collision_mask = 8
 
-[node name="InteractioinCollision" type="CollisionShape2D" parent="Interaction"]
-position = Vector2( 17.9, 0.1795 )
+[node name="InteractioinBody" type="CollisionShape2D" parent="Interaction"]
+position = Vector2( 16.1537, 0.1795 )
 rotation = 1.57079
 shape = SubResource( 2 )
 [connection signal="finished" from="Audio/Step" to="." method="OnStepAudioFinished"]
