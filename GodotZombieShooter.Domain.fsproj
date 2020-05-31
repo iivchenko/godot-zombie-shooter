@@ -55,6 +55,7 @@
     <Compile Include="src\Global.fs" />
     <Compile Include="src\IHittable.fs" />
     <Compile Include="src\IInteractable.fs" />
+    <Compile Include="src\PlayerState.fs" />
     <Compile Include="src\Properties\AssemblyInfo.fs" />
     <Compile Include="src\Effects\HitEffect\Hit.fs" />
     <Compile Include="src\Weapons\Gun.fs" />

@@ -2,19 +2,16 @@
 
 open Godot
 
-type PlayerState =
-    | Stand
-    | SimpleGun
-    | GoodGun
-    | MachineGun
-
 type public Player () as this =
     inherit KinematicBody2D ()
+
+    let stateChangedEvent = new Event<_>()
 
     let target = lazy(this.GetNode<Sprite>(NodePath("TargetRay/Target")))
     let targetRay = lazy(this.GetNode<RayCast2D>(NodePath("TargetRay")))
     let step = lazy(this.GetNode<AudioStreamPlayer2D>(NodePath("Audio/Step")))
     let gunShot = lazy(this.GetNode<AudioStreamPlayer2D>(NodePath("Audio/GunShot")))
+    let noAmmo = lazy(this.GetNode<AudioStreamPlayer2D>(NodePath("Audio/NoAmmo")))
 
     let standState = lazy(this.GetNode<Node2D>(new NodePath("State/Stand")))
     let simpleGunState = lazy(this.GetNode<Node2D>(new NodePath("State/SimpleGun")))
@@ -51,6 +48,9 @@ type public Player () as this =
     member _.MaxSpeed
         with get () = maxSpeed
         and set (value) = maxSpeed <- value
+
+    [<CLIEvent>]
+    member _.StateChanged = stateChangedEvent.Publish
 
     member private _.DisableState(state: PlayerState) = 
         
@@ -100,6 +100,20 @@ type public Player () as this =
             state <- state'
             this.EnableState(state)
 
+    member private _.DecreaseAmmo() = 
+        
+        match state with
+        | Stand -> ()
+        | SimpleGun -> 
+            simpleGun <- simpleGun - 1
+            stateChangedEvent.Trigger(state, simpleGun)
+        | GoodGun ->
+            goodGun <- goodGun - 1
+            stateChangedEvent.Trigger(state, goodGun)
+        | MachineGun ->
+            machineGun <- machineGun - 1
+            stateChangedEvent.Trigger(state, machineGun)
+
     override _._Ready() = 
         hitFactory <- ResourceLoader.Load("res://src/Effects/HitEffect/Hit.tscn") :?> PackedScene
         Input.SetMouseMode(Input.MouseMode.Hidden)
@@ -122,7 +136,9 @@ type public Player () as this =
             base.GetTree().CurrentScene.AddChild(hit)
             hit.Hit()
             gunShot.Value.Play()
-        | true when isShootState() -> () // Implement click sound
+            this.DecreaseAmmo()
+        | true when isShootState() ->
+            noAmmo.Value.Play()
         | _ -> ()
 
     override this._PhysicsProcess (_: float32) =
@@ -143,12 +159,17 @@ type public Player () as this =
                 | GunType.Simple ->
                     simpleGun <- simpleGun + 100
                     this.Switch(SimpleGun)
+                    stateChangedEvent.Trigger(SimpleGun, simpleGun)
                 | GunType.Good -> 
                     goodGun <- goodGun + 100
-                    this.Switch(SimpleGun)
+                    this.Switch(GoodGun)
+                    this.EmitSignal("StateChange", GoodGun)
+                    stateChangedEvent.Trigger(GoodGun, goodGun)
                 | GunType.Machine -> 
                     machineGun <- machineGun + 100
-                    this.Switch(SimpleGun)
+                    this.Switch(MachineGun)
+                    this.EmitSignal("StateChange", MachineGun)
+                    stateChangedEvent.Trigger(MachineGun, machineGun)
             | _ -> ()
                 
         | _ -> ()

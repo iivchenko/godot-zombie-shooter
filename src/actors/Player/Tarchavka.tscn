@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/woman-green/womanGreen_reload.png" type="Texture" id=1]
 [ext_resource path="res://src/Actors/Player/PlayerProxy.cs" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/woman-green/womanGreen_silencer.png" type="Texture" id=7]
 [ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/woman-green/womanGreen_machine.png" type="Texture" id=8]
 [ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/woman-green/womanGreen_gun.png" type="Texture" id=9]
+[ext_resource path="res://assets/KenneyUi/Sounds/switch3.ogg" type="AudioStream" id=10]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 15.1513
@@ -69,6 +70,9 @@ stream = ExtResource( 5 )
 
 [node name="GunShot" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource( 4 )
+
+[node name="NoAmmo" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource( 10 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
