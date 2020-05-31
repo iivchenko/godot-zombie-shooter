@@ -1,9 +1,17 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/furniture-table/tile_455.png" type="Texture" id=1]
 [ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/furniture-table/tile_453.png" type="Texture" id=2]
 
-[node name="Table" type="Node2D"]
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 60.5589, 28.8039 )
+
+[node name="Table" type="StaticBody2D"]
+collision_mask = 0
+
+[node name="Body" type="CollisionShape2D" parent="."]
+position = Vector2( 64, 32 )
+shape = SubResource( 1 )
 
 [node name="Sprite1" type="Sprite" parent="."]
 position = Vector2( 32, 32 )
