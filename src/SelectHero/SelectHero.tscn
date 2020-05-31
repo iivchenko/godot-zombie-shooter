@@ -53,7 +53,7 @@ margin_right = 459.0
 margin_bottom = 309.356
 grow_horizontal = 2
 custom_fonts/font = ExtResource( 6 )
-text = "Chose your hereo!"
+text = "Але спочатку вибери мочителя"
 align = 1
 valign = 1
 __meta__ = {
@@ -124,7 +124,7 @@ margin_top = 47.0
 margin_right = 200.0
 margin_bottom = 93.0
 rect_min_size = Vector2( 200, 0 )
-text = "Start"
+text = "Уперееееед!!"
 __meta__ = {
 "_edit_use_anchors_": false
 }

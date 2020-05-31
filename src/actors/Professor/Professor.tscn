@@ -8,11 +8,10 @@
 [sub_resource type="CapsuleShape2D" id=1]
 height = 28.0
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 16, 24 )
 
-[sub_resource type="Animation" id=2]
-resource_name = "Blink"
+[sub_resource type="Animation" id=3]
 length = 0.5
 loop = true
 step = 0.05
@@ -46,7 +45,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="InterationCollision" type="CollisionShape2D" parent="InterationArea"]
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="States" type="Node2D" parent="."]
 
@@ -60,7 +59,7 @@ texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="States/HasTaskState"]
 autoplay = "Blink"
-anims/Blink = SubResource( 2 )
+anims/Blink = SubResource( 3 )
 
 [node name="IdleState" type="Node2D" parent="States"]
 visible = false
@@ -81,9 +80,9 @@ __meta__ = {
 visible = false
 
 [node name="Panel" type="Panel" parent="States/ShowTaskState"]
-margin_left = -488.0
-margin_top = -256.0
-margin_right = 552.0
+margin_left = -584.0
+margin_top = -368.0
+margin_right = 584.0
 margin_bottom = -64.0
 theme = ExtResource( 4 )
 __meta__ = {
@@ -93,19 +92,21 @@ __meta__ = {
 [node name="MarginContainer" type="MarginContainer" parent="States/ShowTaskState/Panel"]
 margin_left = 20.0
 margin_top = 20.0
-margin_right = 20.0
-margin_bottom = 20.0
+margin_right = 1144.0
+margin_bottom = 290.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="States/ShowTaskState/Panel/MarginContainer"]
-margin_right = 1000.0
-margin_bottom = 153.0
+margin_right = 1124.0
+margin_bottom = 270.0
 rect_min_size = Vector2( 1000, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 0
-text = "Greetings hero. Here is your task. Take this medicines and bring them to Ivan Pavlovich on the North. But be aware of the zombies!! So first go inside the lab and take a weapon."
+text = "Короче лісен ту мі уважно! Маєш взяти оцю ампулу, то є ліки від зомбаківської хвороби, і пеперти її на північ до Івана Павловича - він зна шо робить. Якщо не донесеш - гайки нам усім. Але спочатку зайди до лабораторії і візьми пістоле, та сильно не витрачай паторони бо їх обмаль. Також наші шпіони заховили деякі боєприпаси в лісі. Без них тобі буде вкрай важко. 
+
+Ну, Арьол, уперед!"
 valign = 1
 autowrap = true
 __meta__ = {

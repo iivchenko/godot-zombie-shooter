@@ -49,7 +49,7 @@ margin_right = 185.0
 margin_bottom = 255.356
 grow_horizontal = 2
 custom_fonts/font = ExtResource( 6 )
-text = "Zombie shooter!"
+text = "Мочилово зомбяк!!"
 align = 1
 valign = 1
 __meta__ = {
@@ -72,13 +72,13 @@ __meta__ = {
 [node name="Start" type="Button" parent="Menu"]
 margin_right = 333.0
 margin_bottom = 46.0
-text = "Start"
+text = "Погнали"
 
 [node name="Exit" type="Button" parent="Menu"]
 margin_top = 50.0
 margin_right = 333.0
 margin_bottom = 96.0
-text = "Exit"
+text = "Та ну нафіг!"
 
 [node name="Version" type="Label" parent="."]
 anchor_left = 1.0

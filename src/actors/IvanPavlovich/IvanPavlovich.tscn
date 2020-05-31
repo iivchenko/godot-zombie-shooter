@@ -76,7 +76,9 @@ __meta__ = {
 margin_right = 600.0
 margin_bottom = 114.0
 rect_min_size = Vector2( 600, 0 )
-text = "Greetings Hero. You brought medicines for us! VICTORY!"
+text = "Кросавчік!! Тепер ми врятовані!
+
+ПЕРЕМОГА!!!!"
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -88,7 +90,7 @@ margin_right = 804.0
 margin_bottom = 46.0
 rect_min_size = Vector2( 200, 0 )
 size_flags_vertical = 0
-text = "exit"
+text = "На віхід"
 [connection signal="body_entered" from="InteractionArea" to="." method="OnPlayerCome"]
 [connection signal="body_exited" from="InteractionArea" to="." method="OnPlayerLeave"]
 [connection signal="pressed" from="States/VictoryState/Panel/HBoxContainer/Button" to="." method="OnExitButtonPressed"]
