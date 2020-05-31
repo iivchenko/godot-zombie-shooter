@@ -39,6 +39,7 @@ shape = SubResource( 2 )
 
 [node name="Interact" type="Node2D" parent="States"]
 visible = false
+z_index = 5
 
 [node name="Button" type="Button" parent="States/Interact"]
 margin_left = 4.06575
