@@ -2,6 +2,12 @@
 
 open Godot
 
+type PlayerState =
+    | Stand
+    | SimpleGun
+    | GoodGun
+    | MachineGun
+
 type public Player () as this =
     inherit KinematicBody2D ()
 
@@ -10,12 +16,35 @@ type public Player () as this =
     let step = lazy(this.GetNode<AudioStreamPlayer2D>(NodePath("Audio/Step")))
     let gunShot = lazy(this.GetNode<AudioStreamPlayer2D>(NodePath("Audio/GunShot")))
 
+    let standState = lazy(this.GetNode<Node2D>(new NodePath("State/Stand")))
+    let simpleGunState = lazy(this.GetNode<Node2D>(new NodePath("State/SimpleGun")))
+    let goodGunState = lazy(this.GetNode<Node2D>(new NodePath("State/GoodGun")))
+    let machineGunState = lazy(this.GetNode<Node2D>(new NodePath("State/MachineGun")))
+    let mutable state = Stand
+
     let mutable audio = false
     let mutable maxSpeed = 100.0f
     let mutable velocity = Vector2.Zero
     let mutable interactable: IInteractable option = None
 
-    [<Export>] 
+    let mutable simpleGun = -1
+    let mutable goodGun = -1
+    let mutable machineGun = -1
+
+    let isShootState () = 
+        match state with  
+        | SimpleGun
+        | GoodGun
+        | MachineGun -> true
+        | _ -> false
+
+    let hasArmo () =
+        match state with 
+        | SimpleGun when simpleGun > 0 -> true
+        | GoodGun when goodGun > 0 -> true
+        | MachineGun when machineGun > 0 -> true
+        | _ -> false
+
     let mutable hitFactory : PackedScene = null
 
     [<Export>]
@@ -23,7 +52,57 @@ type public Player () as this =
         with get () = maxSpeed
         and set (value) = maxSpeed <- value
 
-    override _._Ready() = Input.SetMouseMode(Input.MouseMode.Hidden)
+    member private _.DisableState(state: PlayerState) = 
+        
+        match state with
+        | Stand -> 
+            standState.Value.SetProcess(false)
+            standState.Value.Visible <- false
+        | SimpleGun -> 
+            simpleGunState.Value.SetProcess(false)
+            simpleGunState.Value.Visible <- false
+        | GoodGun -> 
+            goodGunState.Value.SetProcess(false)
+            goodGunState.Value.Visible <- false
+        | MachineGun -> 
+            machineGunState.Value.SetProcess(false)
+            machineGunState.Value.Visible <- false
+
+    member private _.EnableState(state: PlayerState) = 
+                
+        match state with
+        | Stand -> 
+            standState.Value.SetProcess(true)
+            standState.Value.Visible <- true
+        | SimpleGun -> 
+            simpleGunState.Value.SetProcess(true)
+            simpleGunState.Value.Visible <- true
+        | GoodGun -> 
+            goodGunState.Value.SetProcess(true)
+            goodGunState.Value.Visible <- true
+        | MachineGun -> 
+            machineGunState.Value.SetProcess(true)
+            machineGunState.Value.Visible <- true
+
+    member private _.Switch(state': PlayerState) =
+        match state' with 
+        | Stand -> ()
+        | SimpleGun when simpleGun > -1 -> 
+            this.DisableState(state)
+            state <- state'
+            this.EnableState(state)
+        | GoodGun when goodGun > -1 -> 
+            this.DisableState(state)
+            state <- state'
+            this.EnableState(state)
+        | MachineGun when machineGun > -1 -> 
+            this.DisableState(state)
+            state <- state'
+            this.EnableState(state)
+
+    override _._Ready() = 
+        hitFactory <- ResourceLoader.Load("res://src/Effects/HitEffect/Hit.tscn") :?> PackedScene
+        Input.SetMouseMode(Input.MouseMode.Hidden)
 
     override _._Process(_: float32) = 
 
@@ -37,12 +116,13 @@ type public Player () as this =
         targetRay.Value.CastTo <- target.Value.Position
 
         match Input.IsActionJustPressed("shoot") with 
-        | true -> 
+        | true when isShootState() && hasArmo() -> 
             let hit = hitFactory.Instance() :?> Hit;
             hit.GlobalPosition <- if targetRay.Value.IsColliding() then targetRay.Value.GetCollisionPoint() else target.Value.GlobalPosition
             base.GetTree().CurrentScene.AddChild(hit)
             hit.Hit()
             gunShot.Value.Play()
+        | true when isShootState() -> () // Implement click sound
         | _ -> ()
 
     override this._PhysicsProcess (_: float32) =
@@ -54,7 +134,23 @@ type public Player () as this =
 
     override _._UnhandledInput(e: InputEvent) =
         match e, interactable with 
-        | :? InputEventKey as key, Some(i) when key.IsActionPressed("interact") -> i.Interact()
+        | :? InputEventKey as key, Some(i) when key.IsActionPressed("interact") -> 
+            i.Interact()
+
+            match i with 
+            | :? Gun as gun -> 
+                match gun.Gun with 
+                | GunType.Simple ->
+                    simpleGun <- simpleGun + 100
+                    this.Switch(SimpleGun)
+                | GunType.Good -> 
+                    goodGun <- goodGun + 100
+                    this.Switch(SimpleGun)
+                | GunType.Machine -> 
+                    machineGun <- machineGun + 100
+                    this.Switch(SimpleGun)
+            | _ -> ()
+                
         | _ -> ()
 
     member _.OnStepAudioFinished() = audio <- false
