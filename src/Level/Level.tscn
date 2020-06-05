@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/Objects/Table/Table.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Weapons/SimpleGun/SimpleGun.tscn" type="PackedScene" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://src/Level/LevelProxy.cs" type="Script" id=12]
 [ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/weapons/weapon_machine.png" type="Texture" id=13]
 [ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/weapons/weapon_silencer.png" type="Texture" id=14]
+[ext_resource path="res://src/Level/PlayerSpawner.gd" type="Script" id=15]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 11.5699
@@ -28,12 +29,13 @@ script = ExtResource( 12 )
 [node name="HeadUpDisplay" type="CanvasLayer" parent="."]
 
 [node name="HeadUpDisplay" type="Control" parent="HeadUpDisplay"]
-anchor_right = 1.0
+anchor_left = 4.49499e-05
+anchor_right = 1.00004
 anchor_bottom = 1.0
-margin_left = -57.9329
-margin_top = -208.972
-margin_right = -57.9329
-margin_bottom = -208.972
+margin_left = -56.606
+margin_top = -209.189
+margin_right = -56.606
+margin_bottom = -209.189
 theme = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -241,6 +243,7 @@ position = Vector2( 983.653, -7390.96 )
 [node name="PlayerSpawner" type="Node2D" parent="."]
 position = Vector2( 768, 547.596 )
 rotation = -3.14159
+script = ExtResource( 15 )
 
 [node name="SimpleGun" parent="." instance=ExtResource( 2 )]
 position = Vector2( 883.519, 838.535 )

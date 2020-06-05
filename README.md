@@ -17,7 +17,6 @@ Yet another game dev learn project based on godot engine
  - Make an ability to fire through the water
  - Improve zombie: do damage
  - Improve hero: take damage
- - Improve spawner: make it more visible in editor mode
 
  ## v0.2
   - Populate laboratory with scientists; player can intercat with them; an they will respond with funny stuff
