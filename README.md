@@ -14,15 +14,6 @@ Yet another game dev learn project based on godot engine
 # TODO
 ## v0.1
 
- - Provide 3 type of weapons [in-progress]
-   - Simple gun [in-progress]
-     - Implement fire delay
-     - Implement ammo limit in the gun
-       - Add to the HUD
-     - Implement recharge the gun
-     - Set guns damage
-   - Good gun
-   - Machine gun
  - Make an ability to fire through the water
  - Improve zombie: do damage
  - Improve hero: take damage

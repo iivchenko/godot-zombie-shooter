@@ -18,7 +18,6 @@ type public Gun () as this =
 
     let interact = lazy(this.GetNode<Node2D>(new NodePath("States/Interact")))
 
-    [<Export>]
     let mutable gun = GunType.Simple
 
     [<Export>]

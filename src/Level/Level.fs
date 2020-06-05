@@ -10,17 +10,30 @@ type public Level () as this =
     let machineGun = lazy(this.GetNode<TextureRect>(NodePath("HeadUpDisplay/HeadUpDisplay/VBoxContainer/Guns/MachineGun")))
     let ammoLabel = lazy(this.GetNode<Label>(NodePath("HeadUpDisplay/HeadUpDisplay/VBoxContainer/Ammo")))
 
-    member _.PlayerStateChanged(state: PlayerState, ammo: int) =
+    member _.PlayerStateChanged(state: PlayerStateStructure) =
         match state with
-        | SimpleGun ->
+        | SimpleGunState (_, _, ammo, _) ->
             simpleGun.Value.Visible <- true
-        | GoodGun -> 
+            simpleGun.Value.Modulate <- Color(1.0f, 1.0f, 1.0f, 1.0f)
+            goodGuneGun.Value.Modulate <- Color(1.0f, 1.0f, 1.0f, 0.25f)
+            machineGun.Value.Modulate <- Color(1.0f, 1.0f, 1.0f, 0.25f)
+
+            ammoLabel.Value.Text <- sprintf "Ammo: %i" ammo
+        | GoodGunState (_, _, ammo, _) ->
             goodGuneGun.Value.Visible <- true
-        | MachineGun -> 
+            simpleGun.Value.Modulate <- Color(1.0f, 1.0f, 1.0f, 0.25f)
+            goodGuneGun.Value.Modulate <- Color(1.0f, 1.0f, 1.0f, 1.0f)
+            machineGun.Value.Modulate <- Color(1.0f, 1.0f, 1.0f, 0.25f)
+
+            ammoLabel.Value.Text <- sprintf "Ammo: %i" ammo
+        | MachineGunState (_, _, ammo, _) ->
             machineGun.Value.Visible <- true
+            simpleGun.Value.Modulate <- Color(1.0f, 1.0f, 1.0f, 0.25f)
+            goodGuneGun.Value.Modulate <- Color(1.0f, 1.0f, 1.0f, 0.25f)
+            machineGun.Value.Modulate <- Color(1.0f, 1.0f, 1.0f, 1.0f)
 
-        ammoLabel.Value.Text <- sprintf "Ammo: %i" ammo
-
+            ammoLabel.Value.Text <- sprintf "Ammo: %i" ammo
+            
     override this._Ready() =
         simpleGun.Value.Visible <- false
         goodGuneGun.Value.Visible <- false
@@ -35,6 +48,6 @@ type public Level () as this =
         let playerScene = ResourceLoader.Load(path) :?> PackedScene
         let player = playerScene.Instance() :?> Player
         player.GlobalPosition <- position
-        player.StateChanged.Add(fun (state, ammo) -> this.PlayerStateChanged(state, ammo))
+        player.StateChanged.Add(fun (state) -> this.PlayerStateChanged(state))
         this.AddChild(player)
 

@@ -30,6 +30,10 @@ script = ExtResource( 12 )
 [node name="HeadUpDisplay" type="Control" parent="HeadUpDisplay"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -57.9329
+margin_top = -208.972
+margin_right = -57.9329
+margin_bottom = -208.972
 theme = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -235,7 +239,7 @@ position = Vector2( 672.042, 543.017 )
 position = Vector2( 983.653, -7390.96 )
 
 [node name="PlayerSpawner" type="Node2D" parent="."]
-position = Vector2( 768, 543.276 )
+position = Vector2( 768, 547.596 )
 rotation = -3.14159
 
 [node name="SimpleGun" parent="." instance=ExtResource( 2 )]
