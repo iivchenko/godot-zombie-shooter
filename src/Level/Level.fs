@@ -5,10 +5,11 @@ open Godot
 type public Level () as this =
     inherit Node2D ()
 
+    let lifeLabel = lazy(this.GetNode<Label>(NodePath("HeadUpDisplay/HeadUpDisplay/VBoxContainer/Life")))
+    let ammoLabel = lazy(this.GetNode<Label>(NodePath("HeadUpDisplay/HeadUpDisplay/VBoxContainer/Ammo")))
     let simpleGun = lazy(this.GetNode<TextureRect>(NodePath("HeadUpDisplay/HeadUpDisplay/VBoxContainer/Guns/SimpleGun")))
     let goodGuneGun = lazy(this.GetNode<TextureRect>(NodePath("HeadUpDisplay/HeadUpDisplay/VBoxContainer/Guns/GoodGun")))
-    let machineGun = lazy(this.GetNode<TextureRect>(NodePath("HeadUpDisplay/HeadUpDisplay/VBoxContainer/Guns/MachineGun")))
-    let ammoLabel = lazy(this.GetNode<Label>(NodePath("HeadUpDisplay/HeadUpDisplay/VBoxContainer/Ammo")))
+    let machineGun = lazy(this.GetNode<TextureRect>(NodePath("HeadUpDisplay/HeadUpDisplay/VBoxContainer/Guns/MachineGun")))    
 
     member _.PlayerStateChanged(state: PlayerStateStructure) =
         match state with
@@ -49,5 +50,6 @@ type public Level () as this =
         let player = playerScene.Instance() :?> Player
         player.GlobalPosition <- position
         player.StateChanged.Add(fun (state) -> this.PlayerStateChanged(state))
+        player.LifeChaged.Add(fun life -> lifeLabel.Value.Text <- sprintf "Life: %i" life )
         this.AddChild(player)
 

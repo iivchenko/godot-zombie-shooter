@@ -13,21 +13,27 @@ type public Player () as this =
     inherit KinematicBody2D ()
 
     let stateChangedEvent = new Event<_>()
+    let lifeChangedEvent = new Event<_>()
 
     let target = lazy(this.GetNode<Sprite>(NodePath("TargetRay/Target")))
     let targetRay = lazy(this.GetNode<RayCast2D>(NodePath("TargetRay")))
     let step = lazy(this.GetNode<AudioStreamPlayer2D>(NodePath("Audio/Step")))
     let gunShot = lazy(this.GetNode<AudioStreamPlayer2D>(NodePath("Audio/GunShot")))
     let noAmmo = lazy(this.GetNode<AudioStreamPlayer2D>(NodePath("Audio/NoAmmo")))
+    let hitSound = lazy(this.GetNode<AudioStreamPlayer2D>(NodePath("Audio/Hit")))
+    let bloodEffect = lazy(this.GetNode<Particles2D>(NodePath("Blood")))
 
     let mutable state = Stand
     let mutable states: Map<PlayerState, PlayerStateStructure> = Map.empty
 
+    let mutable life = 100
     let mutable audio = false
     let mutable maxSpeed = 100.0f
     let mutable velocity = Vector2.Zero
     let mutable interactable: IInteractable option = None
     let mutable shootDelay = 0.0f
+
+    let (| Alive | Dead |) life = if life > 0 then Alive else Dead 
 
     let isShootState () = 
         match state with  
@@ -68,6 +74,9 @@ type public Player () as this =
 
     [<CLIEvent>]
     member _.StateChanged = stateChangedEvent.Publish
+
+    [<CLIEvent>]
+    member _.LifeChaged = lifeChangedEvent.Publish
 
     member private _.DisableState(state: PlayerState) = 
         
@@ -201,3 +210,15 @@ type public Player () as this =
         | _ -> ()
 
     member _.OnInteractionFinish(body: obj) = interactable <- None
+
+    interface IHittable with
+        member this.Hit(damage: int) =
+            life <- max (life - damage) 0
+
+            lifeChangedEvent.Trigger(life)
+            hitSound.Value.Play()
+            bloodEffect.Value.Emitting <- true
+
+            match life with 
+            | Alive -> ()
+            | Dead -> this.QueueFree()

@@ -1,5 +1,8 @@
 tool
 extends Node2D
 
+export var color = Color.white
+
 func _draw() -> void:
-	draw_circle(Vector2(0, 0), 10, Color(1, 1, 1, 0.5))
+	if Engine.editor_hint:
+		draw_circle(Vector2(0, 0), 10, color)
