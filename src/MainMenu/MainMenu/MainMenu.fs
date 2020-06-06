@@ -13,6 +13,7 @@ type public MainMenu () as this =
 
     override _._Ready() = 
          Input.SetMouseMode(Input.MouseMode.Visible)
+         this.GetTree().Paused <- false
 
     member this.OnStartPressed() = 
         buttonClick.Value.Play()

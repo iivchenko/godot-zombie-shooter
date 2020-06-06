@@ -64,7 +64,6 @@
     <Compile Include="src\Actors\Zombie\ZombieProxy.cs" />
     <Compile Include="src\SelectHero\SelectHeroProxy.cs" />
     <Compile Include="src\Weapons\GunProxy.cs" />
-    <Compile Include="TestActor.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="GodotZombieShooter.Domain.fsproj">

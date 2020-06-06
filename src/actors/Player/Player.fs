@@ -14,6 +14,7 @@ type public Player () as this =
 
     let stateChangedEvent = new Event<_>()
     let lifeChangedEvent = new Event<_>()
+    let playerKilledEvent = Event<_>()
 
     let target = lazy(this.GetNode<Sprite>(NodePath("TargetRay/Target")))
     let targetRay = lazy(this.GetNode<RayCast2D>(NodePath("TargetRay")))
@@ -74,6 +75,9 @@ type public Player () as this =
 
     [<CLIEvent>]
     member _.StateChanged = stateChangedEvent.Publish
+
+    [<CLIEvent>]
+    member _.PlayerKilled = playerKilledEvent.Publish
 
     [<CLIEvent>]
     member _.LifeChaged = lifeChangedEvent.Publish
@@ -221,4 +225,5 @@ type public Player () as this =
 
             match life with 
             | Alive -> ()
-            | Dead -> this.QueueFree()
+            | Dead -> 
+                playerKilledEvent.Trigger()

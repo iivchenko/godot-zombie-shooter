@@ -16,11 +16,12 @@ Yet another game dev learn project based on godot engine
 ## v0.1
 
  - Make an ability to fire through the water
- - Defeat screen: here death
+ - Populate level with danger!!
 
  ## v0.2
   - Populate laboratory with scientists; player can intercat with them; an they will respond with funny stuff
 
  ## v0.x
-  - Integrate project with git
   - Add in game debug only console
+  - Add bat/powershell file to download godot with a correct version to the repo folder
+  - Add bat file to start project from repo
