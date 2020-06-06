@@ -10,4 +10,4 @@ func _on_alarm() -> void:
 	var zombies = get_children()
 	
 	for i in zombies.size():
-		zombies[i].ViewRadius = 1000
+		zombies[i].ViewRadius = 2500

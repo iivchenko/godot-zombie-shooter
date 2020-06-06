@@ -82,8 +82,8 @@ __meta__ = {
 visible = false
 
 [node name="Panel" type="Panel" parent="States/ShowTaskState"]
-margin_left = -584.0
-margin_top = -368.0
+margin_left = -616.0
+margin_top = -408.0
 margin_right = 584.0
 margin_bottom = -64.0
 theme = ExtResource( 4 )
@@ -94,19 +94,19 @@ __meta__ = {
 [node name="MarginContainer" type="MarginContainer" parent="States/ShowTaskState/Panel"]
 margin_left = 20.0
 margin_top = 20.0
-margin_right = 1144.0
-margin_bottom = 290.0
+margin_right = 1184.0
+margin_bottom = 336.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="States/ShowTaskState/Panel/MarginContainer"]
-margin_right = 1124.0
+margin_right = 1164.0
 margin_bottom = 270.0
 rect_min_size = Vector2( 1000, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 0
-text = "Короче лісен ту мі уважно! Маєш взяти оцю ампулу, то є ліки від зомбаківської хвороби, і поперти її на північ до Івана Павловича - він зна шо робить. Якщо не донесеш - гайки нам усім. Але спочатку зайди до лабораторії і візьми там пістолет, та сильно не витрачай паторони бо їх обмаль. Також наші шпіони заховили деякі боєприпаси в лісі. Без них тобі буде вкрай важко. 
+text = "Короче лісен ту мі уважно! Маєш взяти оцю ампулу, то є ліки від зомбаківської хвороби, і поперти її на північ до Івана Павловича - він зна шо робить. Якщо не донесеш - гайки нам усім. Але спочатку зайди до лабораторії і візьми там пістолет, та сильно не витрачай паторони бо їх обмаль. Також наші шпіони заховили деякі боєприпаси по дорозі та інший пісоль улісіі. Без них тобі буде вкрай важко. 
 
 Ну, Арьол, впірьод!"
 valign = 1

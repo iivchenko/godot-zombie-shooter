@@ -15,6 +15,7 @@ type public Player () as this =
     let stateChangedEvent = new Event<_>()
     let lifeChangedEvent = new Event<_>()
     let playerKilledEvent = new Event<_>()
+    let playerInteractedEvent = new Event<_>()
 
     let target = lazy(this.GetNode<Sprite>(NodePath("TargetRay/Target")))
     let targetRay = lazy(this.GetNode<RayCast2D>(NodePath("TargetRay")))
@@ -73,6 +74,13 @@ type public Player () as this =
         with get () = maxSpeed
         and set (value) = maxSpeed <- value
 
+    [<Export>]
+    member _.Life
+        with get () = life
+        and set (value) =
+            life <- value
+            lifeChangedEvent.Trigger(life)
+
     [<CLIEvent>]
     member _.StateChanged = stateChangedEvent.Publish
 
@@ -81,6 +89,21 @@ type public Player () as this =
 
     [<CLIEvent>]
     member _.LifeChaged = lifeChangedEvent.Publish
+
+    [<CLIEvent>]
+    member _.PlayerInteracted = playerInteractedEvent.Publish
+
+    member _.AddSimpleGun(ammo: int) =
+        this.Switch(SimpleGun)
+        this.UpdateAmmo(ammo)
+
+    member _.AddGoodGun(ammo: int) =
+        this.Switch(GoodGun)
+        this.UpdateAmmo(ammo)
+
+    member _.AddMachineGun(ammo: int) =
+        this.Switch(MachineGun)
+        this.UpdateAmmo(ammo)
 
     member private _.DisableState(state: PlayerState) = 
         
@@ -188,22 +211,8 @@ type public Player () as this =
 
     override _._UnhandledInput(e: InputEvent) =
         match e, interactable with 
-        | :? InputEventKey as key, Some(i) when key.IsActionPressed("interact") -> 
-            i.Interact()
-
-            match i with 
-            | :? Gun as gun -> 
-                match gun.Gun with 
-                | GunType.Simple ->
-                    this.Switch(SimpleGun)
-                    this.UpdateAmmo(100)
-                | GunType.Good -> 
-                    this.Switch(GoodGun)
-                    this.UpdateAmmo(100)
-                | GunType.Machine -> 
-                    this.Switch(MachineGun)
-                    this.UpdateAmmo(100)
-            | _ -> ()
+        | :? InputEventKey as key, Some(i) when key.IsActionPressed("interact") -> i.Interact()
+        | :? InputEventKey as key, _ when key.IsActionPressed("interact") -> playerInteractedEvent.Trigger()
         | _ -> ()
 
     member _.OnStepAudioFinished() = audio <- false
