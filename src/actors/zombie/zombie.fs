@@ -4,6 +4,8 @@ open Godot
 
 type public Zombie () as this =
     inherit KinematicBody2D ()
+
+    let hitedEvent = new Event<_>()
     let mutable maxLife = 100
     let mutable maxSpeed = 100.0f
 
@@ -19,8 +21,16 @@ type public Zombie () as this =
     [<Export>]
     let mutable damage = 10
 
-    [<Export>]
     let mutable viewRadius = 100.0f
+
+    [<Export>]
+    member _.ViewRadius 
+        with get() = viewRadius 
+        and set(value) =
+            viewRadius <- value
+            let shape = new CircleShape2D()
+            shape.Radius <- viewRadius
+            visual.Value.Shape <- shape
 
     [<Export>]
     member _.MaxSpeed with get() = maxSpeed and set(value) = maxSpeed <- value
@@ -28,10 +38,16 @@ type public Zombie () as this =
     [<Export>]
     member _.MaxLife with get() = maxLife and set(value) = maxLife <- value
 
+    [<CLIEvent>]
+    member _.OnHited = hitedEvent.Publish
+
     override this._Ready() = 
         life <- maxLife
 
-        (visual.Value.Shape :?> CircleShape2D).Radius <- viewRadius
+        let shape = new CircleShape2D()
+        shape.Radius <- viewRadius
+        visual.Value.Shape <- shape
+
 
     override _._PhysicsProcess(_: float32) = 
     
@@ -58,7 +74,6 @@ type public Zombie () as this =
     member _.OnPlayerLost (_: Player) = target <- None
 
     member _.OnPlayerEnteredAttackZone(player: obj) = 
-        let aa = player :?> IHittable |> Some
         attackTarger <- player :?> IHittable |> Some
     
     member _.OnPlayerExitAttackZone(player: obj) = attackTarger <- None
@@ -66,6 +81,8 @@ type public Zombie () as this =
     interface IHittable with
         member this.Hit(damage: int) =
             life <- max (life - damage) 0
+
+            hitedEvent.Trigger()
 
             match life with 
             | Alive -> ()

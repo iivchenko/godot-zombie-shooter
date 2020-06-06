@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://src/Objects/Table/Table.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Weapons/SimpleGun/SimpleGun.tscn" type="PackedScene" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://src/Actors/IvanPavlovich/IvanPavlovich.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/Actors/Zombie/Zombie.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/KenneyUi/Font/H1Font.tres" type="DynamicFont" id=8]
+[ext_resource path="res://src/Level/ZombieGroup.gd" type="Script" id=9]
+[ext_resource path="res://src/Level/Tools.gd" type="Script" id=10]
 [ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/weapons/weapon_gun.png" type="Texture" id=11]
 [ext_resource path="res://src/Level/LevelProxy.cs" type="Script" id=12]
 [ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/weapons/weapon_machine.png" type="Texture" id=13]
@@ -222,6 +224,33 @@ position = Vector2( 768, 832 )
 [node name="Table#2" parent="Game/Map" instance=ExtResource( 1 )]
 position = Vector2( 960, 832 )
 
+[node name="Enemies" type="Node2D" parent="Game"]
+
+[node name="Group1" type="Node2D" parent="Game/Enemies"]
+script = ExtResource( 9 )
+
+[node name="Zombie" parent="Game/Enemies/Group1" instance=ExtResource( 7 )]
+position = Vector2( 34.3257, -207.92 )
+ViewRadius = 100.0
+
+[node name="Zombie2" parent="Game/Enemies/Group1" instance=ExtResource( 7 )]
+position = Vector2( 237.991, -201.802 )
+
+[node name="Zombie3" parent="Game/Enemies/Group1" instance=ExtResource( 7 )]
+position = Vector2( 437.645, -206.259 )
+
+[node name="Group2" type="Node2D" parent="Game/Enemies"]
+script = ExtResource( 9 )
+
+[node name="Zombie" parent="Game/Enemies/Group2" instance=ExtResource( 7 )]
+position = Vector2( 1488.08, -526.018 )
+
+[node name="Zombie2" parent="Game/Enemies/Group2" instance=ExtResource( 7 )]
+position = Vector2( 1684.59, -526.666 )
+
+[node name="Zombie3" parent="Game/Enemies/Group2" instance=ExtResource( 7 )]
+position = Vector2( 1829.49, -527.313 )
+
 [node name="PlayerSpawner" type="Node2D" parent="Game"]
 position = Vector2( 768, 543.017 )
 rotation = -3.14159
@@ -231,10 +260,6 @@ __meta__ = {
 }
 color = Color( 1, 0, 0, 0.498039 )
 
-[node name="Zombie5" parent="Game" instance=ExtResource( 7 )]
-position = Vector2( 960, 400.748 )
-damage = 35
-
 [node name="SimpleGun" parent="Game" instance=ExtResource( 2 )]
 position = Vector2( 883.519, 838.535 )
 
@@ -243,5 +268,8 @@ position = Vector2( 983.653, -7390.96 )
 
 [node name="Professor" parent="Game" instance=ExtResource( 3 )]
 position = Vector2( 672.042, 543.017 )
+
+[node name="Tools" type="Node2D" parent="."]
+script = ExtResource( 10 )
 [connection signal="pressed" from="GUI/DefeatScreen/Buttons/Restart" to="." method="OnRestartButtonPressed"]
 [connection signal="pressed" from="GUI/DefeatScreen/Buttons/Exit" to="." method="OnExitButtonPressed"]

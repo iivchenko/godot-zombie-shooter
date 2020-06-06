@@ -14,7 +14,7 @@ type public Player () as this =
 
     let stateChangedEvent = new Event<_>()
     let lifeChangedEvent = new Event<_>()
-    let playerKilledEvent = Event<_>()
+    let playerKilledEvent = new Event<_>()
 
     let target = lazy(this.GetNode<Sprite>(NodePath("TargetRay/Target")))
     let targetRay = lazy(this.GetNode<RayCast2D>(NodePath("TargetRay")))

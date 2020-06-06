@@ -47,6 +47,7 @@ type public Level () as this =
         player.QueueFree()
             
     override this._Ready() =
+        this.GetNode<Node2D>(NodePath("Tools")).QueueFree()
         simpleGun.Value.Visible <- false
         goodGuneGun.Value.Visible <- false
         machineGun.Value.Visible <- false
