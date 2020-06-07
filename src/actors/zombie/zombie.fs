@@ -53,8 +53,8 @@ type public Zombie () as this =
     
         match target with 
         | Some t -> 
-            base.LookAt(t.Position)
-            let direction = (t.Position - base.Position).Normalized()
+            base.LookAt(t.GlobalPosition)
+            let direction = (t.GlobalPosition - base.GlobalPosition).Normalized()
             let velocity = direction * maxSpeed
             base.MoveAndSlide(velocity) |> ignore
         | None -> ()

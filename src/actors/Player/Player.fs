@@ -160,8 +160,8 @@ type public Player () as this =
         states <- 
             states
                 .Add(Stand, StandState(this.GetNode<Node2D>(new NodePath("State/Stand"))))
-                .Add(SimpleGun, SimpleGunState(this.GetNode<Node2D>(new NodePath("State/SimpleGun")), 25, -1, 1.0f))
-                .Add(GoodGun, GoodGunState(this.GetNode<Node2D>(new NodePath("State/GoodGun")), 40, -1, 0.5f))
+                .Add(SimpleGun, SimpleGunState(this.GetNode<Node2D>(new NodePath("State/SimpleGun")), 25, -1, 0.6f))
+                .Add(GoodGun, GoodGunState(this.GetNode<Node2D>(new NodePath("State/GoodGun")), 40, -1, 0.2f))
                 .Add(MachineGun, MachineGunState(this.GetNode<Node2D>(new NodePath("State/MachineGun")), 75, -1, 0.01f))
 
     override _._Process(delta: float32) = 
@@ -177,7 +177,7 @@ type public Player () as this =
         targetRay.Value.CastTo <- target.Value.Position
 
         match Input.IsActionJustPressed("player_shoot") with 
-        | true when isShootState() && hasArmo(states.[state]) && noShootDelay() ->             
+        | true when isShootState() && hasArmo(states.[state]) && noShootDelay() ->
             let hit = hitFactory.Instance() :?> Hit;
             hit.Damage <- getDamage state
             hit.GlobalPosition <- if targetRay.Value.IsColliding() then targetRay.Value.GetCollisionPoint() else target.Value.GlobalPosition
