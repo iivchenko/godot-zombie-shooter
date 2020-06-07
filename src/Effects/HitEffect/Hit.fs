@@ -28,4 +28,6 @@ type public Hit () as this =
         | (:? IHittable as target) when enabled -> 
             target.Hit(damage)
             enabled <- false
+        | (:? Node as node) when enabled && node.IsInGroup("hitable") -> 
+            node.Call("hit", [|damage|]) |> ignore
         | _ -> ()

@@ -11,12 +11,14 @@ Yet another game dev learn project based on godot engine
    - [Grass Step](https://freesound.org/people/DRFX/sounds/347371/)
    - [Sniper Shot](https://freesound.org/people/LeMudCrab/sounds/163460/)
    - [Body hit](https://freesound.org/people/nextmaking/sounds/86003/)
+   - [Explosion](https://freesound.org/people/Nbs%20Dark/sounds/94185/)
 
 # TODO
 ## v0.1
 
  - Make an ability to fire through the water
  - Populate level with danger!!
+ - Add zombie death particle - BLOOD!! but green and sound
 
  ## v0.2
   - Populate laboratory with scientists; player can intercat with them; an they will respond with funny stuff
@@ -25,3 +27,11 @@ Yet another game dev learn project based on godot engine
   - Add in game debug only console
   - Add bat/powershell file to download godot with a correct version to the repo folder
   - Add bat file to start project from repo
+  - Add some cool music
+  - Investigage state machine in godot 
+    - https://docs.godotengine.org/en/stable/tutorials/misc/state_design_pattern.html?highlight=state
+    - https://www.youtube.com/watch?v=Ty4wZL7pDME
+    - https://www.youtube.com/watch?v=4bdiyOGHLtM
+    - https://www.youtube.com/watch?v=IvevmfkvT_g
+  - Add NextScnene valudation on editor side for Main Many start button
+  - Remove git integartion from godot - it looks like I am not really like it

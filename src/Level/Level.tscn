@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://src/Objects/Table.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Objects/SimpleGun.tscn" type="PackedScene" id=2]
@@ -20,6 +20,8 @@
 [ext_resource path="res://src/Objects/GoodGun.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/Objects/Aidkit.tscn" type="PackedScene" id=19]
 [ext_resource path="res://src/Objects/MachineGun.tscn" type="PackedScene" id=20]
+[ext_resource path="res://src/Actors/ZomTV.tscn" type="PackedScene" id=21]
+[ext_resource path="res://src/Level/TVFight.gd" type="Script" id=22]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Fade"
@@ -41,6 +43,9 @@ extents = Vector2( 362.995, 34.5876 )
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 89.8341
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 57.3541, 2.89769 )
 
 [node name="Level" type="Node2D"]
 pause_mode = 2
@@ -216,7 +221,7 @@ __meta__ = {
 z_index = 2
 tile_set = ExtResource( 5 )
 format = 1
-tile_data = PoolIntArray( -1769472, 3, 0, -1769471, 3, 0, -1769470, 3, 0, -1769469, 3, 0, -1638402, 3, 0, -1638401, 3, 0, -1703936, 3, 0, -1703935, 3, 0, -1703934, 3, 0, -1703933, 3, 0, -1703932, 3, 0, -1703931, 3, 0, -1572865, 3, 0, -1638400, 3, 0, -1638399, 3, 0, -1638398, 3, 0, -1638396, 3, 0, -1638395, 3, 0, -1638394, 3, 0, -1507330, 3, 0, -1507329, 3, 0, -1572864, 3, 0, -1572863, 3, 0, -1572862, 3, 0, -1572860, 3, 0, -1572859, 3, 0, -1572857, 3, 0, -1507322, 3, 0, -1507319, 3, 0, -1376258, 3, 0, -1441791, 3, 0, -1441790, 3, 0, -1441789, 3, 0, -1441787, 3, 0, -1441786, 3, 0, -1441784, 3, 0, -1310722, 3, 0, -1310721, 3, 0, -1376256, 3, 0, -1376255, 3, 0, -1376254, 3, 0, -1376253, 3, 0, -1376252, 3, 0, -1376249, 3, 0, -1376248, 3, 0, -1245186, 3, 0, -1310720, 3, 0, -1310718, 3, 0, -1310716, 3, 0, -1310714, 3, 0, -1310713, 3, 0, -1179650, 3, 0, -1179649, 3, 0, -1245178, 3, 0, -1245177, 3, 0, -1179648, 3, 0, -1179647, 3, 0, -1179645, 3, 0, -1179644, 3, 0, -1179643, 3, 0, -1114112, 3, 0, -1114111, 3, 0, -1114110, 3, 0, -1114107, 3, 0, -1114106, 3, 0, -1114105, 3, 0, -1048574, 3, 0, -1048573, 3, 0, -1048572, 3, 0, -1048571, 3, 0, -1048570, 3, 0, -983036, 3, 0, -983035, 3, 0, -524271, 3, 0, -262136, 3, 0 )
+tile_data = PoolIntArray( -1769472, 3, 0, -1769471, 3, 0, -1769470, 3, 0, -1769469, 3, 0, -1638402, 3, 0, -1638401, 3, 0, -1703936, 3, 0, -1703935, 3, 0, -1703934, 3, 0, -1703933, 3, 0, -1703932, 3, 0, -1703931, 3, 0, -1572865, 3, 0, -1638400, 3, 0, -1638399, 3, 0, -1638394, 3, 0, -1507330, 3, 0, -1507329, 3, 0, -1572864, 3, 0, -1572863, 3, 0, -1572857, 3, 0, -1507322, 3, 0, -1507319, 3, 0, -1441791, 3, 0, -1441790, 3, 0, -1441789, 3, 0, -1441788, 3, 0, -1441787, 3, 0, -1441786, 3, 0, -1441784, 3, 0, -1310723, 3, 0, -1376255, 3, 0, -1376254, 3, 0, -1376253, 3, 0, -1376252, 3, 0, -1376249, 3, 0, -1376248, 3, 0, -1310718, 3, 0, -1310716, 3, 0, -1310714, 3, 0, -1310713, 3, 0, -1179649, 3, 0, -1245178, 3, 0, -1245177, 3, 0, -1179648, 3, 0, -1179645, 3, 0, -1179644, 3, 0, -1179643, 3, 0, -1114112, 3, 0, -1114107, 3, 0, -1114106, 3, 0, -1114105, 3, 0, -983041, 3, 0, -1048572, 3, 0, -1048571, 3, 0, -1048570, 3, 0, -983038, 3, 0, -983036, 3, 0, -983035, 3, 0, -917503, 3, 0, -524271, 3, 0, -262136, 3, 0 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -358,17 +363,36 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Enemies/Forest_Trap4/Area2D"]
 shape = SubResource( 3 )
 
-[node name="PlayerSpawner" type="Node2D" parent="Game"]
-position = Vector2( -994.684, 914.071 )
-rotation = -3.14159
-script = ExtResource( 15 )
-color = Color( 1, 0, 0, 0.498039 )
+[node name="TVFight" type="Node2D" parent="Game/Enemies"]
+position = Vector2( 1333.58, -2125.53 )
+rotation = -0.00975105
+script = ExtResource( 22 )
 
-[node name="IvanPavlovich" parent="Game" instance=ExtResource( 6 )]
-position = Vector2( 983.653, -7390.96 )
+[node name="CrossLine" type="Area2D" parent="Game/Enemies/TVFight"]
+monitorable = false
+collision_layer = 0
+collision_mask = 2
 
-[node name="Professor" parent="Game" instance=ExtResource( 3 )]
-position = Vector2( 672.042, 543.017 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Enemies/TVFight/CrossLine"]
+position = Vector2( -436.438, 304.994 )
+rotation = 0.424819
+scale = Vector2( 10, 10 )
+shape = SubResource( 4 )
+
+[node name="ZomTV" parent="Game/Enemies/TVFight" instance=ExtResource( 21 )]
+position = Vector2( -477.217, -584.195 )
+rotation = -3.11732
+_time = 5
+
+[node name="ZomTV2" parent="Game/Enemies/TVFight" instance=ExtResource( 21 )]
+position = Vector2( -345.728, -719.417 )
+rotation = -3.0163
+_time = 5
+
+[node name="ZomTV3" parent="Game/Enemies/TVFight" instance=ExtResource( 21 )]
+position = Vector2( -214.632, -587.921 )
+rotation = 3.14126
+_time = 5
 
 [node name="PowerUps" type="Node2D" parent="Game"]
 
@@ -399,8 +423,20 @@ position = Vector2( 2783.43, -2366.5 )
 ammo = 500
 
 [node name="GoodGun2" parent="Game/PowerUps" instance=ExtResource( 18 )]
-position = Vector2( 788.969, -2546.85 )
+position = Vector2( 915.661, -2840.07 )
 ammo = 20
+
+[node name="PlayerSpawner" type="Node2D" parent="Game"]
+position = Vector2( 776.791, 562.61 )
+rotation = -3.14159
+script = ExtResource( 15 )
+color = Color( 1, 0, 0, 0.498039 )
+
+[node name="IvanPavlovich" parent="Game" instance=ExtResource( 6 )]
+position = Vector2( 983.653, -7390.96 )
+
+[node name="Professor" parent="Game" instance=ExtResource( 3 )]
+position = Vector2( 672.042, 543.017 )
 
 [node name="Tools" type="Node2D" parent="."]
 script = ExtResource( 10 )
@@ -419,3 +455,4 @@ __meta__ = {
 [connection signal="body_exited" from="Game/Enemies/Forest_Trap3/Area2D" to="Game/Enemies/Forest_Trap3" method="OnPlayerReleased"]
 [connection signal="body_entered" from="Game/Enemies/Forest_Trap4/Area2D" to="Game/Enemies/Forest_Trap4" method="OnPlayerTrapped"]
 [connection signal="body_exited" from="Game/Enemies/Forest_Trap4/Area2D" to="Game/Enemies/Forest_Trap4" method="OnPlayerReleased"]
+[connection signal="body_entered" from="Game/Enemies/TVFight/CrossLine" to="Game/Enemies/TVFight" method="_on_player_trapped"]
