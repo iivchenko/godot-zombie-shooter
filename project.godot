@@ -24,6 +24,10 @@ config/name="GodotZombieShooter"
 run/main_scene="res://src/MainMenu/MainMenu.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Global="*res://src/global.gd"
+
 [display]
 
 window/size/width=1920
@@ -36,6 +40,7 @@ enabled=PoolStringArray( "mono_debugger" )
 [gdnative]
 
 singletons=[ "res://addons/godot_git/git_api.gdnlib" ]
+singletons_disabled=[ "res://addons/godot_git/git_api.gdnlib" ]
 
 [input]
 

@@ -17,7 +17,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-NextScene = "res://src/SelectHero/SelectHero.tscn"
+NextScene = "res://src/select_hero.tscn"
 
 [node name="Sounds" type="Node2D" parent="."]
 position = Vector2( -4.76837e-07, 0 )

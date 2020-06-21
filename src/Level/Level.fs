@@ -53,8 +53,8 @@ type public Level () as this =
         machineGun.Value.Visible <- false
 
         let position = this.GetNode<Node2D>(new NodePath("Game/PlayerSpawner")).GlobalPosition
-
-        let path = match Global.Hero with 
+        let hero =  this.GetNode<Node>(NodePath("/root/Global")).Call("get", "hero") :?> int        
+        let path = match hero with 
         | 1 -> "res://src/Actors/Player/Tarchavka.tscn"
         | 2 -> "res://src/Actors/Player/Emilio.tscn"
 

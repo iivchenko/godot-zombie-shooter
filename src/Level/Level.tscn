@@ -425,7 +425,7 @@ position = Vector2( 915.661, -2840.07 )
 ammo = 20
 
 [node name="PlayerSpawner" type="Node2D" parent="Game"]
-position = Vector2( 833.572, 546.75 )
+position = Vector2( 991.733, -7298.48 )
 rotation = -3.14159
 script = ExtResource( 15 )
 color = Color( 1, 0, 0, 0.498039 )
