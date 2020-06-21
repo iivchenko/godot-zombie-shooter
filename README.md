@@ -19,6 +19,11 @@ Yet another game dev learn project based on godot engine
  - Make an ability to fire through the water
  - Populate level with danger!!
  - Add zombie death particle - BLOOD!! but green and sound
+ - Add final giant boss fight!
+   - Implement BOOS
+   - Implement necromansers
+     - Take professor sprite, make it more dark and put sume dark particles
+  - Implement file
 
  ## v0.2
   - Populate laboratory with scientists; player can intercat with them; an they will respond with funny stuff
@@ -35,3 +40,4 @@ Yet another game dev learn project based on godot engine
     - https://www.youtube.com/watch?v=IvevmfkvT_g
   - Add NextScnene valudation on editor side for Main Many start button
   - Remove git integartion from godot - it looks like I am not really like it
+  - Lower case files in the project
