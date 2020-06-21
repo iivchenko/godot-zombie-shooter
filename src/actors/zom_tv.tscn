@@ -1,8 +1,40 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/furniture-tv/tile_536.png" type="Texture" id=1]
-[ext_resource path="res://src/Actors/ZomTV.gd" type="Script" id=2]
-[ext_resource path="res://assets/Sounds/explosion.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/Sounds/explosion.wav" type="AudioStream" id=1]
+[ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/furniture-tv/tile_536.png" type="Texture" id=2]
+
+[sub_resource type="GDScript" id=7]
+script/source = "extends StaticBody2D
+
+export var _life = 150
+export var _time = 1
+
+var _template = preload(\"res://src/Actors/Zombie/Zombie.tscn\")
+var _processed = false
+
+func _process(_delta: float) -> void:
+	if not _processed and _life <= 0 and $ExplosionEffect.emitting == false:
+		_processed = true
+		queue_free()
+
+func start() -> void:
+	$Timer.wait_time = _time
+	$Timer.start(-1)
+	
+func hit(damage) -> void:
+	_life -= damage[0]
+	
+	if _life <= 0:
+		$ExplosionEffect.emitting = true
+		$ExplosionSound.play()
+		$Sprite.visible = false
+	
+func SpawnZombie() -> void:
+	var zombie = _template.instance()
+	zombie.ViewRadius = 2000
+	zombie.position = $SpawnPoint.position
+	add_child(zombie)
+"
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 23.1918, 21.2661 )
@@ -42,11 +74,11 @@ color_ramp = SubResource( 3 )
 ]]
 collision_layer = 5
 collision_mask = 3
-script = ExtResource( 2 )
+script = SubResource( 7 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -0.469116, 0 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 
 [node name="Body" type="CollisionShape2D" parent="."]
 visible = false
@@ -67,5 +99,5 @@ explosiveness = 0.5
 process_material = SubResource( 6 )
 
 [node name="ExplosionSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 3 )
+stream = ExtResource( 1 )
 [connection signal="timeout" from="Timer" to="." method="SpawnZombie"]

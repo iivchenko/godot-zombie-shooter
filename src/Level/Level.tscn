@@ -20,8 +20,9 @@
 [ext_resource path="res://src/Objects/GoodGun.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/Objects/Aidkit.tscn" type="PackedScene" id=19]
 [ext_resource path="res://src/Objects/MachineGun.tscn" type="PackedScene" id=20]
-[ext_resource path="res://src/Actors/ZomTV.tscn" type="PackedScene" id=21]
+[ext_resource path="res://src/Actors/zom_tv.tscn" type="PackedScene" id=21]
 [ext_resource path="res://src/Level/TVFight.gd" type="Script" id=22]
+
 
 
 
