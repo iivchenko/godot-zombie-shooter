@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="GodotZombieShooter"
-run/main_scene="res://src/MainMenu/MainMenu.tscn"
+run/main_scene="res://src/main_menu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
