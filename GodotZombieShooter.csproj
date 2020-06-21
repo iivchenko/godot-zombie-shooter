@@ -58,7 +58,6 @@
     <Compile Include="src\Effects\HitEffect\HitProxy.cs" />
     <Compile Include="src\Level\LevelProxy.cs" />
     <Compile Include="src\MainMenu\MainMenuProxy.cs" />
-    <Compile Include="src\Objects\Spawner\SpawnerProxy.cs" />
     <Compile Include="src\Properties\AssemblyInfo.cs" />
     <Compile Include="src\Actors\Zombie\ZombieProxy.cs" />
     <Compile Include="src\SelectHero\SelectHeroProxy.cs" />
@@ -70,6 +69,5 @@
       <Name>GodotZombieShooter.Domain</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

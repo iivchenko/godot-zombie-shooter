@@ -61,7 +61,6 @@
     <Compile Include="src\Weapons\Gun.fs" />
     <Compile Include="src\Actors\Player\Player.fs" />
     <Compile Include="src\Actors\Zombie\Zombie.fs" />
-    <Compile Include="src\Objects\Spawner\Spawner.fs" />
     <Compile Include="src\MainMenu\MainMenu\MainMenu.fs" />
     <Compile Include="src\SelectHero\SelectHero.fs" />
     <Compile Include="src\Level\Level.fs" />
