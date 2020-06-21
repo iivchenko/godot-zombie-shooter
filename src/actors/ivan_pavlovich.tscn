@@ -1,0 +1,160 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/KenneyUi/KenneyUiBlue.tres" type="Theme" id=1]
+[ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/soldier/soldier1_stand.png" type="Texture" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends KinematicBody2D
+
+enum { IDLE, VICTORY, CAN_INTERACT}
+
+var _player = null
+
+onready var _victory_state = $States/VictoryState
+onready var _can_interact_state = $States/CanInteractState
+onready var _state = IDLE
+
+func _update_state (new_state) -> void:
+
+	match _state: 
+		IDLE:
+			pass
+		VICTORY:
+			_victory_state.set_process(false)
+			_victory_state.visible = false
+		CAN_INTERACT:
+			_can_interact_state.set_process(false)
+			_can_interact_state.visible = false
+
+	_state = new_state
+
+	match _state: 
+		IDLE:
+			pass
+		VICTORY:
+			_victory_state.set_process(true)
+			_victory_state.visible = true
+		CAN_INTERACT:
+			_can_interact_state.set_process(true)
+			_can_interact_state.visible = true
+
+
+func _ready() -> void:
+	_update_state(_state)
+
+
+func _on_player_come(body) -> void:
+
+	match _state:
+		IDLE:
+			_update_state(CAN_INTERACT)
+	
+	_player = body
+	_player.connect(\"InteractedSignal\", self, \"_interact\")
+
+
+func _on_player_leave(_body) -> void:
+	_player.disconnect(\"InteractedSignal\", self, \"_interact\")
+	_player = null
+	
+	_update_state(IDLE)
+
+
+func _on_exit_button_pressed() -> void:
+	get_tree().change_scene(\"res://src/MainMenu/MainMenu.tscn\")
+
+
+func _interact() -> void:
+	_update_state(VICTORY)
+"
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 11.5618
+height = 22.7767
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 23.2772, 13.1829 )
+
+[node name="IvanPavlovich" type="KinematicBody2D"]
+collision_layer = 9
+script = SubResource( 1 )
+
+[node name="VisualBody" type="Sprite" parent="."]
+rotation = 1.57079
+texture = ExtResource( 2 )
+
+[node name="CollisionBody" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 2 )
+
+[node name="InteractionArea" type="Area2D" parent="."]
+monitorable = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="InteractionBody" type="CollisionShape2D" parent="InteractionArea"]
+position = Vector2( 0, 15.7847 )
+shape = SubResource( 3 )
+
+[node name="States" type="Node2D" parent="."]
+
+[node name="IdleState" type="Node2D" parent="States"]
+visible = false
+
+[node name="CanInteractState" type="Node2D" parent="States"]
+visible = false
+
+[node name="Button" type="Button" parent="States/CanInteractState"]
+margin_left = 11.8671
+margin_top = -20.2298
+margin_right = 30.8671
+margin_bottom = -0.229832
+text = "F"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VictoryState" type="Node2D" parent="States"]
+visible = false
+
+[node name="Panel" type="Panel" parent="States/VictoryState"]
+margin_left = -429.0
+margin_top = -211.0
+margin_right = 430.0
+margin_bottom = -38.0
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="States/VictoryState/Panel"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="Label" parent="States/VictoryState/Panel/HBoxContainer"]
+margin_right = 600.0
+margin_bottom = 114.0
+rect_min_size = Vector2( 600, 0 )
+text = "Кросавчік!! Тепер ми врятовані!
+
+ПЕРЕМОГА!!!!"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="States/VictoryState/Panel/HBoxContainer"]
+margin_left = 604.0
+margin_right = 804.0
+margin_bottom = 46.0
+rect_min_size = Vector2( 200, 0 )
+size_flags_vertical = 0
+text = "На віхід"
+[connection signal="body_entered" from="InteractionArea" to="." method="_on_player_come"]
+[connection signal="body_exited" from="InteractionArea" to="." method="_on_player_leave"]
+[connection signal="pressed" from="States/VictoryState/Panel/HBoxContainer/Button" to="." method="_on_exit_button_pressed"]

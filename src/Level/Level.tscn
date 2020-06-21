@@ -5,7 +5,7 @@
 [ext_resource path="res://src/Actors/professor.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/KenneyUi/KenneyUiBlue.tres" type="Theme" id=4]
 [ext_resource path="res://assets/TileSets/kenney-top-down-shooter.tres" type="TileSet" id=5]
-[ext_resource path="res://src/Actors/IvanPavlovich/IvanPavlovich.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/Actors/ivan_pavlovich.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/Actors/Zombie/Zombie.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/KenneyUi/Font/H1Font.tres" type="DynamicFont" id=8]
 [ext_resource path="res://src/Level/ZombieGroup.gd" type="Script" id=9]
@@ -22,9 +22,6 @@
 [ext_resource path="res://src/Objects/MachineGun.tscn" type="PackedScene" id=20]
 [ext_resource path="res://src/Actors/zom_tv.tscn" type="PackedScene" id=21]
 [ext_resource path="res://src/Level/TVFight.gd" type="Script" id=22]
-
-
-
 
 [sub_resource type="Animation" id=1]
 resource_name = "Fade"
@@ -428,7 +425,7 @@ position = Vector2( 915.661, -2840.07 )
 ammo = 20
 
 [node name="PlayerSpawner" type="Node2D" parent="Game"]
-position = Vector2( 776.791, 562.61 )
+position = Vector2( 833.572, 546.75 )
 rotation = -3.14159
 script = ExtResource( 15 )
 color = Color( 1, 0, 0, 0.498039 )

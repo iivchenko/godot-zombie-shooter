@@ -54,7 +54,6 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\Actors\IvanPavlovich\IvanPavlovichProxy.cs" />
     <Compile Include="src\Actors\Player\PlayerProxy.cs" />
     <Compile Include="src\Effects\HitEffect\HitProxy.cs" />
     <Compile Include="src\Level\LevelProxy.cs" />
@@ -71,8 +70,6 @@
       <Name>GodotZombieShooter.Domain</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\Actors\Professor\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
