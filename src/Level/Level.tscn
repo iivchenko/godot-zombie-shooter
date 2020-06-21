@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/Objects/Table.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Objects/SimpleGun.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/Actors/Professor/Professor.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Actors/professor.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/KenneyUi/KenneyUiBlue.tres" type="Theme" id=4]
 [ext_resource path="res://assets/TileSets/kenney-top-down-shooter.tres" type="TileSet" id=5]
 [ext_resource path="res://src/Actors/IvanPavlovich/IvanPavlovich.tscn" type="PackedScene" id=6]
@@ -22,6 +22,8 @@
 [ext_resource path="res://src/Objects/MachineGun.tscn" type="PackedScene" id=20]
 [ext_resource path="res://src/Actors/ZomTV.tscn" type="PackedScene" id=21]
 [ext_resource path="res://src/Level/TVFight.gd" type="Script" id=22]
+
+
 
 [sub_resource type="Animation" id=1]
 resource_name = "Fade"
