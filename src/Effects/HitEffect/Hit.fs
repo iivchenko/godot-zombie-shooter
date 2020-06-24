@@ -24,10 +24,7 @@ type public Hit () as this =
         } |> Async.StartAsTask |> ignore
 
     member this.OnHitBodyEntered(body: obj) =
-        match body with 
-        | (:? IHittable as target) when enabled -> 
-            target.Hit(damage)
-            enabled <- false
+        match body with
         | (:? Node as node) when enabled && node.IsInGroup("hitable") -> 
             node.Call("hit", [|damage|]) |> ignore
         | _ -> ()
