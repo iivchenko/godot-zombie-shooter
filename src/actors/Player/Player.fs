@@ -153,7 +153,7 @@ type public Player () as this =
         stateChangedEvent.Trigger(states.[state])
 
     override _._Ready() = 
-        hitFactory <- ResourceLoader.Load("res://src/Effects/HitEffect/Hit.tscn") :?> PackedScene
+        hitFactory <- ResourceLoader.Load("res://src/Effects/hit.tscn") :?> PackedScene
         Input.SetMouseMode(Input.MouseMode.Hidden)
 
         states <- 
@@ -177,11 +177,11 @@ type public Player () as this =
 
         match Input.IsActionJustPressed("player_shoot") with 
         | true when isShootState() && hasArmo(states.[state]) && noShootDelay() ->
-            let hit = hitFactory.Instance() :?> Hit;
-            hit.Damage <- getDamage state
-            hit.GlobalPosition <- if targetRay.Value.IsColliding() then targetRay.Value.GetCollisionPoint() else target.Value.GlobalPosition
+            let hit = hitFactory.Instance();
+            hit.Set("damage", getDamage state);
+            hit.Set("global_position", if targetRay.Value.IsColliding() then targetRay.Value.GetCollisionPoint() else target.Value.GlobalPosition);
             base.GetTree().CurrentScene.AddChild(hit)
-            hit.Hit()
+            hit.Call("hit");
             gunShot.Value.Play()
             this.UpdateAmmo(-1)
             shootDelay <- getShootDelay states.[state]

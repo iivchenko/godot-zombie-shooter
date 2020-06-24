@@ -47,7 +47,7 @@ func _process (delta) -> void:
 
 
 func hit(damage) -> void:
-	_life = max(_life - damage[0], 0)
+	_life = max(_life - damage, 0)
 	emit_signal(\"hited\")
 	
 	if _life <= 0: 

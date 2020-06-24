@@ -39,7 +39,7 @@ type public Level () as this =
 
             ammoLabel.Value.Text <- sprintf "Ammo: %i" ammo
 
-    member _.OnGameOver() =      
+    member _.OnGameOver() =
         this.GetTree().Paused <- true
         defeatUi.Value.Visible <- true
         fade.Value.Play("Fade")

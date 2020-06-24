@@ -52,11 +52,8 @@
   </PropertyGroup>
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
-    <Compile Include="src\IInteractable.fs" />
     <Compile Include="src\PlayerState.fs" />
     <Compile Include="src\Properties\AssemblyInfo.fs" />
-    <Compile Include="src\Effects\HitEffect\Hit.fs" />
-    <Compile Include="src\Weapons\Gun.fs" />
     <Compile Include="src\Actors\Player\Player.fs" />
     <Compile Include="src\Level\Level.fs" />
     <Content Include="packages.config" />
