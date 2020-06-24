@@ -11,5 +11,10 @@ namespace GodotZombieShooter
 		{
 			PlayerInteracted += (_, __) => EmitSignal(nameof(InteractedSignal));
 		}
+
+		public void Hit(int damage)
+		{
+			base.HitInternal(damage);
+		}
 	}
 }

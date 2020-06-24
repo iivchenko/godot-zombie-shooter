@@ -2,7 +2,7 @@ extends Node2D
 
 onready var _spawner1 = $Spawner1
 onready var _spawner2 = $Spawner2
-onready var zombie = preload("res://src/Actors/Zombie/Zombie.tscn")
+onready var zombie = preload("res://src/Actors/zombie.tscn")
 
 var _trapped = false
 
@@ -13,12 +13,12 @@ func _process(_delta: float) -> void:
 		var parent = get_parent()
 
 		var z1 = zombie.instance()
-		z1.ViewRadius = 1000
+		z1.view_radius = 1000
 		z1.global_position = _spawner1.global_position
 		parent.add_child(z1)
 		
 		var z2 = zombie.instance()
-		z2.ViewRadius = 1000
+		z2.view_radius = 1000
 		z2.global_position = _spawner2.global_position
 		parent.add_child(z2)
 		

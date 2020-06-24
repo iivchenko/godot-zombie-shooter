@@ -59,7 +59,6 @@
     <Compile Include="src\Effects\HitEffect\Hit.fs" />
     <Compile Include="src\Weapons\Gun.fs" />
     <Compile Include="src\Actors\Player\Player.fs" />
-    <Compile Include="src\Actors\Zombie\Zombie.fs" />
     <Compile Include="src\Level\Level.fs" />
     <Content Include="packages.config" />
   </ItemGroup>

@@ -58,7 +58,6 @@
     <Compile Include="src\Effects\HitEffect\HitProxy.cs" />
     <Compile Include="src\Level\LevelProxy.cs" />
     <Compile Include="src\Properties\AssemblyInfo.cs" />
-    <Compile Include="src\Actors\Zombie\ZombieProxy.cs" />
     <Compile Include="src\Weapons\GunProxy.cs" />
   </ItemGroup>
   <ItemGroup>

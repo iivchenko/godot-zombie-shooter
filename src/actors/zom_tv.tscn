@@ -9,7 +9,7 @@ script/source = "extends StaticBody2D
 export var _life = 150
 export var _time = 1
 
-var _template = preload(\"res://src/Actors/Zombie/Zombie.tscn\")
+var _template = preload(\"res://src/Actors/zombie.tscn\")
 var _processed = false
 
 func _process(_delta: float) -> void:

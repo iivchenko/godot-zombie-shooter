@@ -224,15 +224,14 @@ type public Player () as this =
 
     member _.OnInteractionFinish(body: obj) = interactable <- None
 
-    interface IHittable with
-        member this.Hit(damage: int) =
-            life <- max (life - damage) 0
+    member this.HitInternal(damage: int) =
+        life <- max (life - damage) 0
 
-            lifeChangedEvent.Trigger(life)
-            hitSound.Value.Play()
-            bloodEffect.Value.Emitting <- true
+        lifeChangedEvent.Trigger(life)
+        hitSound.Value.Play()
+        bloodEffect.Value.Emitting <- true
 
-            match life with 
-            | Alive -> ()
-            | Dead -> 
-                playerKilledEvent.Trigger()
+        match life with 
+        | Alive -> ()
+        | Dead -> 
+            playerKilledEvent.Trigger()

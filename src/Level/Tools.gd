@@ -10,6 +10,6 @@ func _draw() -> void:
 func zombie_draw(node):
 	for child in node.get_children():
 		if child.name.begins_with("Zombie"):
-			draw_circle(child.position, child.ViewRadius, Color(1, 1, 1, 0.25))
+			draw_circle(child.position, child.view_radius, Color(1, 1, 1, 0.25))
 		if child.get_child_count() > 0:
 			zombie_draw(child)
