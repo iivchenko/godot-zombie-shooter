@@ -32,7 +32,6 @@ type public Player () as this =
     let mutable audio = false
     let mutable maxSpeed = 100.0f
     let mutable velocity = Vector2.Zero
-    let mutable interactable: IInteractable option = None
     let mutable shootDelay = 0.0f
 
     let (| Alive | Dead |) life = if life > 0 then Alive else Dead 
@@ -210,19 +209,11 @@ type public Player () as this =
         velocity <- this.MoveAndSlide(velocity)
 
     override _._UnhandledInput(e: InputEvent) =
-        match e, interactable with 
-        | :? InputEventKey as key, Some(i) when key.IsActionPressed("interact") -> i.Interact()
-        | :? InputEventKey as key, _ when key.IsActionPressed("interact") -> playerInteractedEvent.Trigger()
+        match e with 
+        | :? InputEventKey as key when key.IsActionPressed("interact") -> playerInteractedEvent.Trigger()
         | _ -> ()
 
     member _.OnStepAudioFinished() = audio <- false
-    
-    member _.OnInteractionBegin(body: obj) = 
-        match body with 
-        | :? IInteractable as o -> interactable <- Some o
-        | _ -> ()
-
-    member _.OnInteractionFinish(body: obj) = interactable <- None
 
     member this.HitInternal(damage: int) =
         life <- max (life - damage) 0
