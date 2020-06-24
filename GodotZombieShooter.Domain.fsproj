@@ -52,7 +52,6 @@
   </PropertyGroup>
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
-    <Compile Include="src\IHittable.fs" />
     <Compile Include="src\IInteractable.fs" />
     <Compile Include="src\PlayerState.fs" />
     <Compile Include="src\Properties\AssemblyInfo.fs" />
