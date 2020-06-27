@@ -61,7 +61,7 @@ func _on_player_leave(_body) -> void:
 
 
 func _on_exit_button_pressed() -> void:
-	get_tree().change_scene(\"res://src/MainMenu/MainMenu.tscn\")
+	get_tree().change_scene(\"res://src/main_menu.tscn\")
 
 
 func _interact() -> void:
@@ -78,6 +78,9 @@ extents = Vector2( 23.2772, 13.1829 )
 [node name="IvanPavlovich" type="KinematicBody2D"]
 collision_layer = 9
 script = SubResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="VisualBody" type="Sprite" parent="."]
 rotation = 1.57079

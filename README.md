@@ -16,9 +16,15 @@ Yet another game dev learn project based on godot engine
 # TODO
 ## v0.1
 
+ - Move from .net to gdscript 
+   - Move c# and f# code to dgscript
+   - Remove mono plugin
+   - clean .gitignore
+ - Resolve editor warnings
+ - Fix the nill issues with visual_radius for zombie scene
+ - Update file structure to corespond gdscrip guidelines
  - Make an ability to fire through the water
  - Populate level with danger!!
- - Add zombie death particle - BLOOD!! but green and sound
  - Add final giant boss fight!
    - Implement BOOS
    - Implement necromansers

@@ -22,7 +22,7 @@ func start() -> void:
 	$Timer.start(-1)
 	
 func hit(damage) -> void:
-	_life -= damage[0]
+	_life -= damage
 	
 	if _life <= 0:
 		$ExplosionEffect.emitting = true

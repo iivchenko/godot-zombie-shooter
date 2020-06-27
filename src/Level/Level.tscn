@@ -9,22 +9,116 @@
 [ext_resource path="res://src/Actors/zombie.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/KenneyUi/Font/H1Font.tres" type="DynamicFont" id=8]
 [ext_resource path="res://src/Level/ZombieGroup.gd" type="Script" id=9]
-[ext_resource path="res://src/Level/Tools.gd" type="Script" id=10]
 [ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/weapons/weapon_gun.png" type="Texture" id=11]
-[ext_resource path="res://src/Level/LevelProxy.cs" type="Script" id=12]
 [ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/weapons/weapon_machine.png" type="Texture" id=13]
 [ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/weapons/weapon_silencer.png" type="Texture" id=14]
-[ext_resource path="res://src/Level/PlayerSpawner.gd" type="Script" id=15]
-[ext_resource path="res://src/Level/Trap1.gd" type="Script" id=16]
 [ext_resource path="res://src/Level/Trap2.gd" type="Script" id=17]
 [ext_resource path="res://src/Objects/GoodGun.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/Objects/Aidkit.tscn" type="PackedScene" id=19]
 [ext_resource path="res://src/Objects/MachineGun.tscn" type="PackedScene" id=20]
 [ext_resource path="res://src/Actors/zom_tv.tscn" type="PackedScene" id=21]
-[ext_resource path="res://src/Level/TVFight.gd" type="Script" id=22]
 
-[sub_resource type="Animation" id=1]
-resource_name = "Fade"
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+# TODO:
+#  + Create enum to present player state
+#  + When player state updated pass only enum and ammo value but not the DU
+#  - Remove level f# and c# implementations
+#  - Check level works fine and commit
+
+var _player = null
+
+onready var _life_label = $GUI/HeadUpDisplay/VBoxContainer/Life
+onready var _ammo_label = $GUI/HeadUpDisplay/VBoxContainer/Ammo
+onready var _simple_gun = $GUI/HeadUpDisplay/VBoxContainer/Guns/SimpleGun
+onready var _good_gun = $GUI/HeadUpDisplay/VBoxContainer/Guns/GoodGun
+onready var _machine_gun = $GUI/HeadUpDisplay/VBoxContainer/Guns/MachineGun
+onready var _defeat_ui = $GUI/DefeatScreen
+onready var _fade = $GUI/DefeatScreen/Animation
+
+func _ready() -> void:
+	$Tools.queue_free()
+	
+	_simple_gun.visible = false
+	_good_gun.visible = false
+	_machine_gun.visible = false
+
+	var position = $Game/PlayerSpawner.global_position
+	var hero =  $'/root/Global'.hero
+	var path = \"\"
+	
+	match hero:
+		1: 
+			path = \"res://src/Actors/Player/Tarchavka.tscn\"
+		2:
+			path = \"res://src/Actors/Player/Emilio.tscn\"
+
+	var playerScene = load(path)
+	_player = playerScene.instance()
+	_player.global_position = position
+	_player.connect(\"StateChangedSignal\", self, \"_on_player_state_changed\")
+	_player.connect(\"LifeChangedSignal\", self, \"_on_player_life_changed\")
+	_player.connect(\"PlayerKilledSignal\", self, \"_on_player_killed\")
+	
+	add_child(_player)
+
+	get_tree().paused = false
+
+
+func _update_player_state(state, ammo) -> void:
+	match state:
+		0:
+			pass
+		1: # Simple Gun
+			_simple_gun.visible = true
+			_simple_gun.modulate = Color(1.0, 1.0, 1.0, 1.0)
+			_good_gun.modulate = Color(1.0, 1.0, 1.0, 0.25)
+			_machine_gun.modulate = Color(1.0, 1.0, 1.0, 0.25)
+			
+			_ammo_label.text = \"Ammo: %s\" % ammo
+		
+		2:
+			_good_gun.visible = true
+			_simple_gun.modulate = Color(1.0, 1.0, 1.0, 0.25)
+			_good_gun.modulate = Color(1.0, 1.0, 1.0, 1.0)
+			_machine_gun.modulate = Color(1.0, 1.0, 1.0, 0.25)
+			
+			_ammo_label.text = \"Ammo: %s\" % ammo
+
+		3:
+			_machine_gun.visible = true
+			_simple_gun.modulate = Color(1.0, 1.0, 1.0, 0.25)
+			_good_gun.modulate = Color(1.0, 1.0, 1.0, 0.25)
+			_machine_gun.modulate = Color(1.0, 1.0, 1.0, 1.0)
+			
+			_ammo_label.text = \"Ammo: %s\" % ammo
+
+
+func _on_player_killed() -> void:
+	get_tree().paused = true
+	_defeat_ui.visible = true
+	_fade.play(\"fade\")
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	_player.queue_free()
+
+
+func _on_restart_button_pressed() -> void: 
+	get_tree().reload_current_scene()
+
+
+func _on_exit_button_pressed() -> void:
+	get_tree().change_scene(\"res://src/main_menu.tscn\")
+
+
+func _on_player_state_changed(state, ammo) -> void:
+	_update_player_state(state, ammo)
+
+
+func _on_player_life_changed(life: int) -> void:
+	_life_label.text = \"Life: %s\" % life
+"
+
+[sub_resource type="Animation" id=2]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Fade:color")
 tracks/0/interp = 1
@@ -38,18 +132,93 @@ tracks/0/keys = {
 "values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 362.995, 34.5876 )
+[sub_resource type="GDScript" id=3]
+script/source = "extends Node2D
 
-[sub_resource type="CircleShape2D" id=3]
-radius = 89.8341
+onready var _spawner1 = $Spawner1
+onready var _spawner2 = $Spawner2
+onready var zombie = preload(\"res://src/Actors/zombie.tscn\")
+
+var _trapped = false
+
+var max_count = 10
+
+func _process(_delta: float) -> void:
+	if _trapped and max_count > 0:
+		var parent = get_parent()
+
+		var z1 = zombie.instance()		
+		z1.global_position = _spawner1.global_position
+		parent.add_child(z1)
+		z1.view_radius = 1000 # TODO: this is a hack. If change view_raduis before adding to tree will fail wiht nill error
+		
+		var z2 = zombie.instance()
+		z2.global_position = _spawner2.global_position
+		parent.add_child(z2)
+		z2.view_radius = 1000
+		
+		max_count -= 2
+
+func OnPlayerTrapped(_body: Node) -> void:
+	_trapped = true
+	
+func OnPlayerReleased(_body: Node) -> void:
+	_trapped = false
+"
 
 [sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 362.995, 34.5876 )
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 89.8341
+
+[sub_resource type="GDScript" id=6]
+script/source = "extends Node2D
+
+var triggered = false
+
+func _on_player_trapped(_body: Node) -> void:
+	if not triggered:
+		triggered = true
+		$ZomTV.start()
+		$ZomTV2.start()
+		$ZomTV3.start()"
+
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 57.3541, 2.89769 )
+
+[sub_resource type="GDScript" id=8]
+script/source = "tool
+extends Node2D
+
+export var color = Color.white
+
+func _draw() -> void:
+	if Engine.editor_hint:
+		draw_circle(Vector2(0, 0), 10, color)
+"
+
+[sub_resource type="GDScript" id=9]
+script/source = "tool
+extends Node2D
+
+func _process(_delta: float) -> void:
+	update()
+	
+func _draw() -> void:	
+	zombie_draw(self.get_parent())
+	
+func zombie_draw(node):
+	for child in node.get_children():
+		if child.name.begins_with(\"Zombie\"):
+			draw_circle(child.position, child.view_radius, Color(1, 1, 1, 0.25))
+		if child.get_child_count() > 0:
+			zombie_draw(child)
+"
 
 [node name="Level" type="Node2D"]
 pause_mode = 2
-script = ExtResource( 12 )
+script = SubResource( 1 )
 
 [node name="GUI" type="CanvasLayer" parent="."]
 pause_mode = 2
@@ -136,7 +305,7 @@ __meta__ = {
 }
 
 [node name="Animation" type="AnimationPlayer" parent="GUI/DefeatScreen"]
-anims/Fade = SubResource( 1 )
+anims/fade = SubResource( 2 )
 
 [node name="Fade" type="ColorRect" parent="GUI/DefeatScreen"]
 anchor_right = 1.0
@@ -276,7 +445,7 @@ position = Vector2( 1829.49, -527.313 )
 
 [node name="Trap1" type="Node2D" parent="Game/Enemies"]
 position = Vector2( 850.896, -333.05 )
-script = ExtResource( 16 )
+script = SubResource( 3 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -290,7 +459,7 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Enemies/Trap1/Area2D"]
 position = Vector2( 11.7278, 22.0483 )
 rotation = -0.375802
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 
 [node name="Spawner1" type="Node2D" parent="Game/Enemies/Trap1"]
 position = Vector2( -276.858, 136.24 )
@@ -312,7 +481,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Enemies/Forest_Trap1/Area2D"]
 position = Vector2( -0.962036, 0 )
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 
 [node name="Forest_Trap2" type="Node2D" parent="Game/Enemies"]
 position = Vector2( 191.197, -1023.79 )
@@ -327,7 +496,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Enemies/Forest_Trap2/Area2D"]
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 
 [node name="Forest_Trap3" type="Node2D" parent="Game/Enemies"]
 position = Vector2( -129.693, -1282.76 )
@@ -342,7 +511,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Enemies/Forest_Trap3/Area2D"]
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 
 [node name="Forest_Trap4" type="Node2D" parent="Game/Enemies"]
 position = Vector2( 470.751, -1231.27 )
@@ -357,12 +526,12 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Enemies/Forest_Trap4/Area2D"]
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 
 [node name="TVFight" type="Node2D" parent="Game/Enemies"]
 position = Vector2( 1333.58, -2125.53 )
 rotation = -0.00975105
-script = ExtResource( 22 )
+script = SubResource( 6 )
 
 [node name="CrossLine" type="Area2D" parent="Game/Enemies/TVFight"]
 monitorable = false
@@ -373,7 +542,7 @@ collision_mask = 2
 position = Vector2( -436.438, 304.994 )
 rotation = 0.424819
 scale = Vector2( 10, 10 )
-shape = SubResource( 4 )
+shape = SubResource( 7 )
 
 [node name="ZomTV" parent="Game/Enemies/TVFight" instance=ExtResource( 21 )]
 position = Vector2( -477.217, -584.195 )
@@ -425,10 +594,10 @@ position = Vector2( 915.661, -2840.07 )
 ammo = 20
 
 [node name="PlayerSpawner" type="Node2D" parent="Game"]
-position = Vector2( 803.032, 543.628 )
+position = Vector2( 802.516, 544.453 )
 rotation = -3.14159
-script = ExtResource( 15 )
-color = Color( 1, 0, 0, 0.498039 )
+script = SubResource( 8 )
+color = Color( 1, 1, 1, 1 )
 
 [node name="IvanPavlovich" parent="Game" instance=ExtResource( 6 )]
 position = Vector2( 983.653, -7390.96 )
@@ -437,12 +606,12 @@ position = Vector2( 983.653, -7390.96 )
 position = Vector2( 672.042, 543.017 )
 
 [node name="Tools" type="Node2D" parent="."]
-script = ExtResource( 10 )
+script = SubResource( 9 )
 __meta__ = {
 "_edit_lock_": true
 }
-[connection signal="pressed" from="GUI/DefeatScreen/Buttons/Restart" to="." method="OnRestartButtonPressed"]
-[connection signal="pressed" from="GUI/DefeatScreen/Buttons/Exit" to="." method="OnExitButtonPressed"]
+[connection signal="pressed" from="GUI/DefeatScreen/Buttons/Restart" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="GUI/DefeatScreen/Buttons/Exit" to="." method="_on_exit_button_pressed"]
 [connection signal="body_entered" from="Game/Enemies/Trap1/Area2D" to="Game/Enemies/Trap1" method="OnPlayerTrapped"]
 [connection signal="body_exited" from="Game/Enemies/Trap1/Area2D" to="Game/Enemies/Trap1" method="OnPlayerReleased"]
 [connection signal="body_entered" from="Game/Enemies/Forest_Trap1/Area2D" to="Game/Enemies/Forest_Trap1" method="OnPlayerTrapped"]

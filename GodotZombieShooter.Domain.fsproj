@@ -55,7 +55,6 @@
     <Compile Include="src\PlayerState.fs" />
     <Compile Include="src\Properties\AssemblyInfo.fs" />
     <Compile Include="src\Actors\Player\Player.fs" />
-    <Compile Include="src\Level\Level.fs" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

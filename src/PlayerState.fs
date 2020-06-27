@@ -1,7 +1,7 @@
 ﻿namespace GodotZombieShooter
 
 type PlayerState =
-    | Stand
-    | SimpleGun
-    | GoodGun
-    | MachineGun
+    | Stand = 0
+    | SimpleGun = 1
+    | GoodGun = 2
+    | MachineGun = 3

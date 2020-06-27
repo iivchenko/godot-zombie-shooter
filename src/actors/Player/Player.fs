@@ -13,7 +13,7 @@ type public Player () as this =
     inherit KinematicBody2D ()
 
     let stateChangedEvent = new Event<_>()
-    let lifeChangedEvent = new Event<_>()
+    let lifeChangedEvent = new Event<int>()
     let playerKilledEvent = new Event<_>()
     let playerInteractedEvent = new Event<_>()
 
@@ -25,7 +25,7 @@ type public Player () as this =
     let hitSound = lazy(this.GetNode<AudioStreamPlayer2D>(NodePath("Audio/Hit")))
     let bloodEffect = lazy(this.GetNode<Particles2D>(NodePath("Blood")))
 
-    let mutable state = Stand
+    let mutable state = PlayerState.Stand
     let mutable states: Map<PlayerState, PlayerStateStructure> = Map.empty
 
     let mutable life = 100
@@ -38,9 +38,9 @@ type public Player () as this =
 
     let isShootState () = 
         match state with  
-        | SimpleGun
-        | GoodGun
-        | MachineGun -> true
+        | PlayerState.SimpleGun
+        | PlayerState.GoodGun
+        | PlayerState.MachineGun -> true
         | _ -> false
 
     let hasArmo (state) =
@@ -59,6 +59,13 @@ type public Player () as this =
         | SimpleGunState (_, damage, _, _)
         | GoodGunState (_, damage, _, _)
         | MachineGunState (_, damage, _, _) -> damage
+        | _ -> 0
+
+    let getAmmo state = 
+        match states.[state] with 
+        | SimpleGunState (_, _, ammo, _)
+        | GoodGunState (_, _, ammo, _)
+        | MachineGunState (_, _, ammo, _) -> ammo
         | _ -> 0
     
     let getShootDelay state =
@@ -93,15 +100,15 @@ type public Player () as this =
     member _.PlayerInteracted = playerInteractedEvent.Publish
 
     member _.AddSimpleGun(ammo: int) =
-        this.Switch(SimpleGun)
+        this.Switch(PlayerState.SimpleGun)
         this.UpdateAmmo(ammo)
 
     member _.AddGoodGun(ammo: int) =
-        this.Switch(GoodGun)
+        this.Switch(PlayerState.GoodGun)
         this.UpdateAmmo(ammo)
 
     member _.AddMachineGun(ammo: int) =
-        this.Switch(MachineGun)
+        this.Switch(PlayerState.MachineGun)
         this.UpdateAmmo(ammo)
 
     member private _.DisableState(state: PlayerState) = 
@@ -128,14 +135,14 @@ type public Player () as this =
 
     member private _.Switch(state': PlayerState) =
         match state' with 
-        | SimpleGun
-        | GoodGun
-        | MachineGun ->
+        | PlayerState.SimpleGun
+        | PlayerState.GoodGun
+        | PlayerState.MachineGun ->
             this.DisableState(state)
             state <- state'
             this.EnableState(state)
 
-            stateChangedEvent.Trigger(states.[state])
+            stateChangedEvent.Trigger(state, getAmmo state)
         | _ -> ()
 
     member private _.UpdateAmmo(ammo': int) = 
@@ -150,7 +157,7 @@ type public Player () as this =
 
         states <- states |> Map.filter (fun key _ -> key <> state)
         states <- states.Add(state, state')
-        stateChangedEvent.Trigger(states.[state])
+        stateChangedEvent.Trigger(state, getAmmo state)
 
     override _._Ready() = 
         hitFactory <- ResourceLoader.Load("res://src/Effects/hit.tscn") :?> PackedScene
@@ -158,10 +165,10 @@ type public Player () as this =
 
         states <- 
             states
-                .Add(Stand, StandState(this.GetNode<Node2D>(new NodePath("State/Stand"))))
-                .Add(SimpleGun, SimpleGunState(this.GetNode<Node2D>(new NodePath("State/SimpleGun")), 25, -1, 0.6f))
-                .Add(GoodGun, GoodGunState(this.GetNode<Node2D>(new NodePath("State/GoodGun")), 40, -1, 0.2f))
-                .Add(MachineGun, MachineGunState(this.GetNode<Node2D>(new NodePath("State/MachineGun")), 75, -1, 0.01f))
+                .Add(PlayerState.Stand, StandState(this.GetNode<Node2D>(new NodePath("State/Stand"))))
+                .Add(PlayerState.SimpleGun, SimpleGunState(this.GetNode<Node2D>(new NodePath("State/SimpleGun")), 25, -1, 0.6f))
+                .Add(PlayerState.GoodGun, GoodGunState(this.GetNode<Node2D>(new NodePath("State/GoodGun")), 40, -1, 0.2f))
+                .Add(PlayerState.MachineGun, MachineGunState(this.GetNode<Node2D>(new NodePath("State/MachineGun")), 75, -1, 0.01f))
 
     override _._Process(delta: float32) = 
 
@@ -190,15 +197,15 @@ type public Player () as this =
         | _ -> ()
          
         match Input.IsActionJustPressed("player_select_simple_gun") with
-        | true when hasArmo(states.[SimpleGun])-> this.Switch(SimpleGun)
+        | true when hasArmo(states.[PlayerState.SimpleGun])-> this.Switch(PlayerState.SimpleGun)
         | _ -> ()
 
         match Input.IsActionJustPressed("player_select_good_gun") with
-        | true when hasArmo(states.[GoodGun]) -> this.Switch(GoodGun)
+        | true when hasArmo(states.[PlayerState.GoodGun]) -> this.Switch(PlayerState.GoodGun)
         | _ -> ()
 
         match Input.IsActionJustPressed("player_select_machine_gun") with
-        | true when hasArmo(states.[MachineGun]) -> this.Switch(MachineGun)
+        | true when hasArmo(states.[PlayerState.MachineGun]) -> this.Switch(PlayerState.MachineGun)
         | _ -> ()
 
     override this._PhysicsProcess (_: float32) =

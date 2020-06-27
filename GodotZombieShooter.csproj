@@ -55,7 +55,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\Actors\Player\PlayerProxy.cs" />
-    <Compile Include="src\Level\LevelProxy.cs" />
     <Compile Include="src\Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -66,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="src\Effects\" />
+    <Folder Include="src\Level\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
