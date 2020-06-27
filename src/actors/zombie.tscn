@@ -42,7 +42,7 @@ func _process (delta) -> void:
 	_attack_delay = max(0.0, _attack_delay - delta)
 	
 	if _attack_target != null and _attack_delay == 0.0:
-		_attack_target.Hit(_damage)
+		_attack_target.hit(_damage)
 		_attack_delay = 2.0
 
 

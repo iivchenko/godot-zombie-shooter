@@ -54,7 +54,6 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\Actors\Player\PlayerProxy.cs" />
     <Compile Include="src\Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -64,6 +63,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="src\Actors\Player\" />
     <Folder Include="src\Effects\" />
     <Folder Include="src\Level\" />
   </ItemGroup>

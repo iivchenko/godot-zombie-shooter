@@ -50,11 +50,11 @@ func _on_player_come(body) -> void:
 			_update_state(CAN_INTERACT)
 	
 	_player = body
-	_player.connect(\"InteractedSignal\", self, \"_interact\")
+	_player.connect(\"interacted\", self, \"_interact\")
 
 
 func _on_player_leave(_body) -> void:
-	_player.disconnect(\"InteractedSignal\", self, \"_interact\")
+	_player.disconnect(\"interacted\", self, \"_interact\")
 	_player = null
 	
 	_update_state(IDLE)
