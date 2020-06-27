@@ -1,16 +1,46 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/Sprites/kenney_nl/genericItem_color_102.png" type="Texture" id=1]
-[ext_resource path="res://src/Objects/Aidkit.gd" type="Script" id=2]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="GDScript" id=1]
+script/source = "extends KinematicBody2D
+
+export var life = 30
+
+var _player = null
+var _can = true
+
+onready var _interact_state = $States/Interact
+
+func _on_InteractionArea_player_entered(body: Node) -> void:
+	_player = body
+	_player.connect(\"interacted\", self, \"_interact\")
+	_interact_state.set_process(true)
+	_interact_state.visible = true
+	
+
+func _on_InteractionArea_player_exited(_body: Node) -> void:
+	_player.disconnect(\"interacted\", self, \"_interact\")
+	_player = null
+	_interact_state.set_process(false)
+	_interact_state.visible = false
+	
+
+func _interact() -> void:
+	if _can:
+		_can = false
+		_player.life += life
+		queue_free()
+"
+
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 13.4952, 13.6093 )
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=3]
 radius = 25.2021
 
 [node name="Aidkit" type="KinematicBody2D"]
-script = ExtResource( 2 )
+script = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.25, 0.25 )
@@ -20,7 +50,7 @@ texture = ExtResource( 1 )
 visible = false
 position = Vector2( -0.409485, 0 )
 rotation = 1.44641
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="InteractionArea" type="Area2D" parent="."]
 visible = false
@@ -30,7 +60,7 @@ collision_mask = 2
 
 [node name="InteractionBody" type="CollisionShape2D" parent="InteractionArea"]
 rotation = -1.0472
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="States" type="Node2D" parent="."]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/woman-green/womanGreen_reload.png" type="Texture" id=1]
-[ext_resource path="res://src/Actors/Player/player.gd" type="Script" id=2]
+[ext_resource path="res://src/actors/player/player.gd" type="Script" id=2]
 [ext_resource path="res://assets/Sprites/ui-space-expansion-pack/crossair-red.png" type="Texture" id=3]
 [ext_resource path="res://assets/Sounds/Gun/Shot/SniperShot.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/Sounds/Footstep/Grass/GrassFootStep.wav" type="AudioStream" id=5]
@@ -11,7 +11,16 @@
 [ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/woman-green/womanGreen_gun.png" type="Texture" id=9]
 [ext_resource path="res://assets/KenneyUi/Sounds/switch3.ogg" type="AudioStream" id=10]
 [ext_resource path="res://assets/Sounds/body_hit.wav" type="AudioStream" id=11]
-[ext_resource path="res://src/Effects/Blood.tscn" type="PackedScene" id=12]
+[ext_resource path="res://src/effects/blood.tscn" type="PackedScene" id=12]
+
+
+
+
+
+
+
+
+
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 15.1513

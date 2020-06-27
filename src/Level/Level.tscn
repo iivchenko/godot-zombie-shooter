@@ -1,22 +1,38 @@
 [gd_scene load_steps=27 format=2]
 
-[ext_resource path="res://src/Objects/Table.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/Objects/SimpleGun.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/Actors/professor.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/objects/table.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/objects/simple_gun.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/actors/professor.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/KenneyUi/KenneyUiBlue.tres" type="Theme" id=4]
 [ext_resource path="res://assets/TileSets/kenney-top-down-shooter.tres" type="TileSet" id=5]
-[ext_resource path="res://src/Actors/ivan_pavlovich.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/Actors/zombie.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/actors/ivan_pavlovich.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/actors/zombie.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/KenneyUi/Font/H1Font.tres" type="DynamicFont" id=8]
-[ext_resource path="res://src/Level/ZombieGroup.gd" type="Script" id=9]
+[ext_resource path="res://src/level/zombie_group.gd" type="Script" id=9]
 [ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/weapons/weapon_gun.png" type="Texture" id=11]
 [ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/weapons/weapon_machine.png" type="Texture" id=13]
 [ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/weapons/weapon_silencer.png" type="Texture" id=14]
-[ext_resource path="res://src/Level/Trap2.gd" type="Script" id=17]
-[ext_resource path="res://src/Objects/GoodGun.tscn" type="PackedScene" id=18]
-[ext_resource path="res://src/Objects/Aidkit.tscn" type="PackedScene" id=19]
-[ext_resource path="res://src/Objects/MachineGun.tscn" type="PackedScene" id=20]
-[ext_resource path="res://src/Actors/zom_tv.tscn" type="PackedScene" id=21]
+[ext_resource path="res://src/level/trap2.gd" type="Script" id=17]
+[ext_resource path="res://src/objects/good_gun.tscn" type="PackedScene" id=18]
+[ext_resource path="res://src/objects/aid_kit.tscn" type="PackedScene" id=19]
+[ext_resource path="res://src/objects/machine_gun.tscn" type="PackedScene" id=20]
+[ext_resource path="res://src/actors/zom_tv.tscn" type="PackedScene" id=21]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D

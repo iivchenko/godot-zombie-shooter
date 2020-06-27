@@ -1,25 +1,55 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/weapons/weapon_gun.png" type="Texture" id=1]
-[ext_resource path="res://src/Objects/SimpleGun.gd" type="Script" id=2]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="GDScript" id=1]
+script/source = "extends KinematicBody2D
+
+export var ammo = 30
+
+var _player = null
+var _life = true
+
+onready var _interact_state = $States/Interact
+
+func _on_InteractionArea_player_entered(body: Node) -> void:
+	_player = body
+	_player.connect(\"interacted\", self, \"_interact\")
+	_interact_state.set_process(true)
+	_interact_state.visible = true
+	
+
+func _on_InteractionArea_player_exited(_body: Node) -> void:
+	_player.disconnect(\"interacted\", self, \"_interact\")
+	_player = null
+	_interact_state.set_process(false)
+	_interact_state.visible = false
+		
+
+func _interact() -> void:
+	if _life:
+		_life = false
+		_player.add_simple_gun(ammo)
+		queue_free()
+"
+
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 10, 5.06762 )
 
-[sub_resource type="CapsuleShape2D" id=2]
+[sub_resource type="CapsuleShape2D" id=3]
 radius = 9.18152
 height = 15.1118
 
 [node name="SimpleGun" type="KinematicBody2D"]
 collision_layer = 9
 collision_mask = 0
-script = ExtResource( 2 )
+script = SubResource( 1 )
 
 [node name="Body" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2( -0.409485, 0 )
 rotation = 0.523598
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 rotation = 0.523598
@@ -33,7 +63,7 @@ collision_mask = 2
 
 [node name="InteractionBody" type="CollisionShape2D" parent="InteractionArea"]
 rotation = -1.0472
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="States" type="Node2D" parent="."]
 
