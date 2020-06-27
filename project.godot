@@ -8,14 +8,9 @@
 
 config_version=4
 
-_global_script_classes=[ {
-"base": "",
-"class": "GitAPI",
-"language": "NativeScript",
-"path": "res://addons/godot_git/git_api.gdns"
-} ]
+_global_script_classes=[  ]
 _global_script_class_icons={
-"GitAPI": ""
+
 }
 
 [application]
@@ -33,14 +28,10 @@ Global="*res://src/global.gd"
 window/size/width=1920
 window/size/height=1080
 
-[editor_plugins]
-
-enabled=PoolStringArray( "mono_debugger" )
-
 [gdnative]
 
-singletons=[ "res://addons/godot_git/git_api.gdnlib" ]
-singletons_disabled=[ "res://addons/godot_git/git_api.gdnlib" ]
+singletons=[  ]
+singletons_disabled=[  ]
 
 [input]
 

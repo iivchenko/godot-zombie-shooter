@@ -599,19 +599,6 @@ rotation = -3.14159
 script = SubResource( 8 )
 color = Color( 1, 1, 1, 1 )
 
-[node name="MachineGun" parent="Game/PlayerSpawner" instance=ExtResource( 20 )]
-position = Vector2( -32.2266, 3.25232 )
-ammo = 9999
-
-[node name="SimpleGun" parent="Game/PlayerSpawner" instance=ExtResource( 2 )]
-position = Vector2( -31.1418, 38.9014 )
-
-[node name="GoodGun" parent="Game/PlayerSpawner" instance=ExtResource( 18 )]
-position = Vector2( -75.1948, -20.5256 )
-
-[node name="Aidkit" parent="Game/PlayerSpawner" instance=ExtResource( 19 )]
-position = Vector2( 30.0593, 70.8322 )
-
 [node name="IvanPavlovich" parent="Game" instance=ExtResource( 6 )]
 position = Vector2( 983.653, -7390.96 )
 
