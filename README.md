@@ -38,8 +38,6 @@ Yet another game dev learn project based on godot engine
 
  ## v0.x
   - Add in game debug only console
-  - Add bat/powershell file to download godot with a correct version to the repo folder
-  - Add bat file to start project from repo
   - Add some cool music
   - Investigage state machine in godot 
     - https://docs.godotengine.org/en/stable/tutorials/misc/state_design_pattern.html?highlight=state

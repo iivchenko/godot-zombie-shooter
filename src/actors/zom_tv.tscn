@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/Sounds/explosion.wav" type="AudioStream" id=1]
 [ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/furniture-tv/tile_536.png" type="Texture" id=2]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id=7]
 script/source = "extends StaticBody2D
 
 export var _life = 150
@@ -36,25 +36,25 @@ func SpawnZombie() -> void:
 	zombie.view_radius = 2000
 "
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 23.1918, 21.2661 )
 
-[sub_resource type="Gradient" id=3]
+[sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0, 0.00257732, 0.412371, 0.994845, 0.997423, 1 )
 colors = PoolColorArray( 1, 0.574219, 0, 1, 1, 1, 1, 1, 0.990234, 0.598325, 0.0161671, 1, 0.966797, 0.50494, 0.463668, 1, 0.957768, 0.89088, 0.880981, 1, 1, 1, 1, 1 )
 
-[sub_resource type="GradientTexture" id=4]
-gradient = SubResource( 3 )
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
 
-[sub_resource type="Curve" id=5]
+[sub_resource type="Curve" id=4]
 min_value = 0.99
 max_value = 15.0
 _data = [ Vector2( 0, 16.0021 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=6]
-curve = SubResource( 5 )
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
 
-[sub_resource type="ParticlesMaterial" id=7]
+[sub_resource type="ParticlesMaterial" id=6]
 emission_shape = 1
 emission_sphere_radius = 2.0
 flag_disable_z = true
@@ -66,15 +66,15 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 linear_accel = 50.0
 scale_random = 0.5
-scale_curve = SubResource( 6 )
-color_ramp = SubResource( 4 )
+scale_curve = SubResource( 5 )
+color_ramp = SubResource( 3 )
 
 [node name="ZomTV" type="StaticBody2D" groups=[
 "hitable",
 ]]
 collision_layer = 5
 collision_mask = 3
-script = SubResource( 1 )
+script = SubResource( 7 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -0.469116, 0 )
@@ -82,7 +82,7 @@ texture = ExtResource( 2 )
 
 [node name="Body" type="CollisionShape2D" parent="."]
 visible = false
-shape = SubResource( 2 )
+shape = SubResource( 8 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
@@ -96,7 +96,7 @@ amount = 100
 one_shot = true
 speed_scale = 2.0
 explosiveness = 0.5
-process_material = SubResource( 7 )
+process_material = SubResource( 6 )
 
 [node name="ExplosionSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 1 )

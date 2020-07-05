@@ -11,8 +11,6 @@ onready var _effect = $Effect
 
 func hit() -> void:
 	_effect.emitting = true
-	var timer = Timer.new()	
-	timer.connect(\"timeout\", self, \"_check_effect\")
 
 
 func _on_hit_body_entered(body) -> void:
@@ -56,4 +54,9 @@ process_material = SubResource( 2 )
 
 [node name="Range" type="CollisionShape2D" parent="."]
 shape = SubResource( 3 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
 [connection signal="body_entered" from="." to="." method="_on_hit_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_check_effect"]

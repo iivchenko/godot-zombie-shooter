@@ -108,7 +108,6 @@ visible = false
 texture = ExtResource( 2 )
 
 [node name="VisualArea" type="Area2D" parent="."]
-visible = false
 monitorable = false
 collision_layer = 0
 collision_mask = 2
@@ -116,7 +115,6 @@ collision_mask = 2
 [node name="VisualRadius" type="CollisionShape2D" parent="VisualArea"]
 
 [node name="AttackArea" type="Area2D" parent="."]
-visible = false
 monitorable = false
 collision_layer = 0
 collision_mask = 2

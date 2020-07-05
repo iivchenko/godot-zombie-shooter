@@ -13,20 +13,13 @@
 [ext_resource path="res://assets/Sounds/body_hit.wav" type="AudioStream" id=11]
 [ext_resource path="res://src/effects/blood.tscn" type="PackedScene" id=12]
 
-
-
-
-
-
-
-
-
-
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 15.1513
 height = 11.1592
 
-[node name="Takchavka" type="KinematicBody2D"]
+[node name="Takchavka" type="KinematicBody2D" groups=[
+"hitable",
+]]
 collision_layer = 2
 collision_mask = 9
 script = ExtResource( 2 )
@@ -64,7 +57,7 @@ texture = ExtResource( 1 )
 position = Vector2( 30.4052, 9.33475 )
 enabled = true
 cast_to = Vector2( 50, 0 )
-collision_mask = 5
+collision_mask = 21
 
 [node name="Target" type="Sprite" parent="TargetRay"]
 position = Vector2( 57.8236, 0.145063 )
