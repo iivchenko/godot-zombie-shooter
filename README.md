@@ -18,20 +18,11 @@ Yet another game dev learn project based on godot engine
 
  - Resolve editor warnings
  - Fix the nill issues with visual_radius for zombie scene
- - Update file structure to corespond gdscrip guidelines
  - Make an ability to fire through the water
- - Populate level with danger!!
- - Add final giant boss fight!
-   - Implement BOOS
-   - Implement necromansers
-     - Take professor sprite, make it more dark and put sume dark particles
-  - Implement file
-  
+
   = bug fix=
-  - Lots of zombies trap - kill one zombie dies all
-  - ammo always on patron less then it should be for all guns
+  - ammo always one patron less then it should be for all guns
   - before the aid kit you can kill the traps
-  - can't exit game on victory
 
  ## v0.2
   - Populate laboratory with scientists; player can intercat with them; an they will respond with funny stuff

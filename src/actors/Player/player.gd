@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 signal interacted
+signal exited
 signal state_changed
 signal life_changed
 signal player_killed
@@ -96,6 +97,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if event.is_action_pressed("interact"):
 			emit_signal("interacted")
+		elif event.is_action_pressed("player_exit"):
+			emit_signal("exited")
 
 
 func life_set(value: int) -> void:

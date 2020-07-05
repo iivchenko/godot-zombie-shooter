@@ -56,7 +56,7 @@ process_material = SubResource( 2 )
 shape = SubResource( 3 )
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.2
 autostart = true
 [connection signal="body_entered" from="." to="." method="_on_hit_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_check_effect"]

@@ -51,21 +51,23 @@ func _on_player_come(body) -> void:
 	
 	_player = body
 	_player.connect(\"interacted\", self, \"_interact\")
+	_player.connect(\"exited\", self, \"_exited\")
 
 
 func _on_player_leave(_body) -> void:
 	_player.disconnect(\"interacted\", self, \"_interact\")
+	_player.disconnect(\"exited\", self, \"_exited\")
 	_player = null
 	
 	_update_state(IDLE)
 
 
-func _on_exit_button_pressed() -> void:
-	get_tree().change_scene(\"res://src/main_menu.tscn\")
-
-
 func _interact() -> void:
 	_update_state(VICTORY)
+
+
+func _exited() -> void:
+	get_tree().change_scene(\"res://src/main_menu.tscn\")
 "
 
 [sub_resource type="CapsuleShape2D" id=2]
@@ -76,6 +78,7 @@ height = 22.7767
 extents = Vector2( 23.2772, 13.1829 )
 
 [node name="IvanPavlovich" type="KinematicBody2D"]
+position = Vector2( 0, -0.629974 )
 collision_layer = 9
 script = SubResource( 1 )
 __meta__ = {
@@ -131,33 +134,25 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="States/VictoryState/Panel"]
-margin_left = 10.0
+margin_left = 13.0
 margin_top = 10.0
-margin_right = -10.0
-margin_bottom = -10.0
+margin_right = 846.0
+margin_bottom = 163.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Text" type="Label" parent="States/VictoryState/Panel/HBoxContainer"]
 margin_right = 600.0
-margin_bottom = 114.0
+margin_bottom = 153.0
 rect_min_size = Vector2( 600, 0 )
 text = "Кросавчік!! Тепер ми врятовані!
 
-ПЕРЕМОГА!!!!"
+ПЕРЕМОГА!!!!
+ну той жми  ескейп шоб ескейп..."
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Button" type="Button" parent="States/VictoryState/Panel/HBoxContainer"]
-margin_left = 604.0
-margin_right = 804.0
-margin_bottom = 46.0
-rect_min_size = Vector2( 200, 0 )
-size_flags_vertical = 0
-text = "На віхід"
 [connection signal="body_entered" from="InteractionArea" to="." method="_on_player_come"]
 [connection signal="body_exited" from="InteractionArea" to="." method="_on_player_leave"]
-[connection signal="pressed" from="States/VictoryState/Panel/HBoxContainer/Button" to="." method="_on_exit_button_pressed"]
