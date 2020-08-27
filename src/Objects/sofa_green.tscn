@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/sofa-green/tile_449.png" type="Texture" id=1]
+[ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/sofa-green/tile_447.png" type="Texture" id=2]
+[ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/sofa-green/tile_448.png" type="Texture" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 26.0863
+height = 122.884
+
+[node name="SofaGreen" type="StaticBody2D"]
+
+[node name="Body" type="CollisionShape2D" parent="."]
+position = Vector2( -0.303528, -0.118118 )
+rotation = 1.56258
+shape = SubResource( 1 )
+
+[node name="VisualPart1" type="Sprite" parent="."]
+position = Vector2( -64, 0 )
+texture = ExtResource( 2 )
+
+[node name="VisualPart2" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+
+[node name="VisualPart3" type="Sprite" parent="."]
+position = Vector2( 64, 0 )
+texture = ExtResource( 1 )

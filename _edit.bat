@@ -1,0 +1,1 @@
+powershell -command "Import-Module .\game.psm1; Run-Editor"

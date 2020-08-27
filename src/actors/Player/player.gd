@@ -43,7 +43,7 @@ var _simple_gun_delay = 0.6
 var _good_gun_delay = 0.2
 var _machine_gun_delay = 0.01
 
-onready var _hit_factory = preload("res://src/Effects/hit.tscn")
+onready var _hit_factory = preload("res://src/effects/hit.tscn")
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)

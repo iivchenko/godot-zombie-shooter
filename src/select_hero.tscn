@@ -52,7 +52,7 @@ script = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-_next_scene = "res://src/Level/Level.tscn"
+_next_scene = "res://src/level/level.tscn"
 
 [node name="Sounds" type="Node2D" parent="."]
 position = Vector2( -4.76837e-07, 0 )

@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var zombie = preload("res://src/Actors/zombie.tscn")
+onready var zombie = preload("res://src/actors/zombie.tscn")
 
 var _trapped = false
 

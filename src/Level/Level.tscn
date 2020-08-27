@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://src/objects/table.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/objects/simple_gun.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://src/level/zombie_group.gd" type="Script" id=9]
 [ext_resource path="res://src/actors/zombie_boss.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/weapons/weapon_gun.png" type="Texture" id=11]
+[ext_resource path="res://src/objects/sofa_green.tscn" type="PackedScene" id=12]
 [ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/weapons/weapon_machine.png" type="Texture" id=13]
 [ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/weapons/weapon_silencer.png" type="Texture" id=14]
 [ext_resource path="res://src/level/trap2.gd" type="Script" id=17]
@@ -133,7 +134,7 @@ script/source = "extends Node2D
 
 onready var _spawner1 = $Spawner1
 onready var _spawner2 = $Spawner2
-onready var zombie = preload(\"res://src/Actors/zombie.tscn\")
+onready var zombie = preload(\"res://src/actors/zombie.tscn\")
 
 var _trapped = false
 
@@ -423,6 +424,7 @@ pause_mode = 1
 
 [node name="Map" type="Node2D" parent="Game"]
 __meta__ = {
+"_edit_group_": true,
 "_edit_lock_": true
 }
 
@@ -467,11 +469,22 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="SofaGreen" parent="Game/Map" instance=ExtResource( 12 )]
+position = Vector2( 1526.43, 955.224 )
+rotation = -0.706089
+
 [node name="Table#1" parent="Game/Map" instance=ExtResource( 1 )]
-position = Vector2( 768, 832 )
+position = Vector2( 468.526, 723.756 )
+rotation = 0.803081
 
 [node name="Table#2" parent="Game/Map" instance=ExtResource( 1 )]
 position = Vector2( 960, 832 )
+
+[node name="Table#4" parent="Game/Map" instance=ExtResource( 1 )]
+position = Vector2( 1295.83, 928 )
+
+[node name="Table#3" parent="Game/Map" instance=ExtResource( 1 )]
+position = Vector2( 800, 832 )
 
 [node name="Enemies" type="Node2D" parent="Game"]
 
@@ -692,7 +705,7 @@ shape = SubResource( 10 )
 position = Vector2( -477.737, -1190.41 )
 
 [node name="SimpleGun" parent="Game/PowerUps" instance=ExtResource( 2 )]
-position = Vector2( 883.519, 838.535 )
+position = Vector2( 433.947, 769.98 )
 
 [node name="GoodGun" parent="Game/PowerUps" instance=ExtResource( 18 )]
 position = Vector2( -545.76, -1118.84 )
@@ -722,10 +735,10 @@ ammo = 20
 position = Vector2( 878.829, -5891.51 )
 
 [node name="Professor" parent="Game" instance=ExtResource( 3 )]
-position = Vector2( 672.042, 543.017 )
+position = Vector2( 310.508, 768.164 )
 
 [node name="PlayerSpawner" type="Node2D" parent="Game"]
-position = Vector2( 772.564, 545.666 )
+position = Vector2( 1465.31, 895.337 )
 rotation = -3.14159
 script = SubResource( 11 )
 color = Color( 1, 1, 1, 1 )
