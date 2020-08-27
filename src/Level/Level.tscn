@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://src/objects/table.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/objects/simple_gun.tscn" type="PackedScene" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://src/objects/sofa_green.tscn" type="PackedScene" id=12]
 [ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/weapons/weapon_machine.png" type="Texture" id=13]
 [ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/weapons/weapon_silencer.png" type="Texture" id=14]
+[ext_resource path="res://src/actors/robocop.tscn" type="PackedScene" id=15]
 [ext_resource path="res://src/level/trap2.gd" type="Script" id=17]
 [ext_resource path="res://src/objects/good_gun.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/objects/aid_kit.tscn" type="PackedScene" id=19]
@@ -487,9 +488,7 @@ position = Vector2( 1295.83, 928 )
 position = Vector2( 800, 832 )
 
 [node name="Enemies" type="Node2D" parent="Game"]
-__meta__ = {
-"_edit_group_": true
-}
+position = Vector2( 0, -0.503906 )
 
 [node name="LockedZombies" type="Node2D" parent="Game/Enemies"]
 __meta__ = {
@@ -509,9 +508,17 @@ position = Vector2( 1963.9, 699.481 )
 rotation = -2.83465
 
 [node name="ZombieBoss" parent="Game/Enemies/LockedZombies" instance=ExtResource( 10 )]
-position = Vector2( 2488.7, 767.459 )
+position = Vector2( 2502.87, 767.434 )
 rotation = 3.10782
 scale = Vector2( 1, 1 )
+
+[node name="Robocop" parent="Game/Enemies/LockedZombies" instance=ExtResource( 15 )]
+position = Vector2( 1823.92, 484.22 )
+rotation = 3.10148
+
+[node name="Robocop2" parent="Game/Enemies/LockedZombies" instance=ExtResource( 15 )]
+position = Vector2( 1821.4, 930.204 )
+rotation = 3.11147
 
 [node name="Group1" type="Node2D" parent="Game/Enemies"]
 script = ExtResource( 9 )
@@ -763,7 +770,7 @@ position = Vector2( 878.829, -5891.51 )
 position = Vector2( 310.508, 768.164 )
 
 [node name="PlayerSpawner" type="Node2D" parent="Game"]
-position = Vector2( 1465.31, 895.337 )
+position = Vector2( 1498.5, 914.099 )
 rotation = -3.14159
 script = SubResource( 11 )
 color = Color( 1, 1, 1, 1 )
