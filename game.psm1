@@ -1,6 +1,6 @@
 ﻿$url = "https://downloads.tuxfamily.org/godotengine/3.2.1/Godot_v3.2.1-stable_win64.exe.zip"
 $serverurl="https://downloads.tuxfamily.org/godotengine/3.2.1/Godot_v3.2.1-stable_linux_headless.64.zip"
-$out = ".tools"
+$out = "$PSScriptRoot/.tools"
 
 function Download-Godot {
 
