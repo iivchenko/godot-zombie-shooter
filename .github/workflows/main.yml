@@ -7,13 +7,14 @@ on:
 jobs:
   Godot:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        platform: [ win-x64 ]
     steps:
-      - uses: actions/checkout@v2
-        with:
-          lfs: true
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Export
+        shell: pwsh
+        run: | 
+            Import-Module .\game.psm1 |
+            Run-ServerExport
       - name: Build
         id: build
         uses: josephbmanley/build-godot-action@v1.4.1
@@ -24,5 +25,5 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
-          name: godot-zombie-shooter-${{ matrix.platform }}
-          path: ${{ github.workspace }}/${{ steps.build.outputs.build }}
+          name: godot-zombie-shooter-win-x64
+          path: publish/winx64
