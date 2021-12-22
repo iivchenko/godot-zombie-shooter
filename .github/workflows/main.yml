@@ -15,13 +15,6 @@ jobs:
         run: | 
             Import-Module .\game.psm1 |
             Run-ServerExport
-      - name: Build
-        id: build
-        uses: josephbmanley/build-godot-action@v1.4.1
-        with:
-          name: example
-          preset: ${{ matrix.platform }}
-          debugMode: "true"
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
