@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://src/objects/table.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/objects/simple_gun.tscn" type="PackedScene" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/weapons/weapon_machine.png" type="Texture" id=13]
 [ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/weapons/weapon_silencer.png" type="Texture" id=14]
 [ext_resource path="res://src/actors/robocop.tscn" type="PackedScene" id=15]
+[ext_resource path="res://src/actors/old_scientist.tscn" type="PackedScene" id=16]
 [ext_resource path="res://src/level/trap2.gd" type="Script" id=17]
 [ext_resource path="res://src/objects/good_gun.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/objects/aid_kit.tscn" type="PackedScene" id=19]
@@ -491,6 +492,7 @@ position = Vector2( 800, 832 )
 position = Vector2( 0, -0.503906 )
 
 [node name="LockedZombies" type="Node2D" parent="Game/Enemies"]
+position = Vector2( 0.454834, 0 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -511,6 +513,13 @@ rotation = -2.83465
 position = Vector2( 2502.87, 767.434 )
 rotation = 3.10782
 scale = Vector2( 1, 1 )
+
+[node name="OldScientist" parent="Game/Enemies/LockedZombies" instance=ExtResource( 16 )]
+position = Vector2( 2337.24, 800.573 )
+rotation = -1.54721
+scale = Vector2( 1, 1 )
+_max_speed = 50.0
+_direction = Vector2( 0, -1 )
 
 [node name="Robocop" parent="Game/Enemies/LockedZombies" instance=ExtResource( 15 )]
 position = Vector2( 1823.92, 484.22 )
@@ -770,7 +779,7 @@ position = Vector2( 878.829, -5891.51 )
 position = Vector2( 310.508, 768.164 )
 
 [node name="PlayerSpawner" type="Node2D" parent="Game"]
-position = Vector2( 1498.5, 914.099 )
+position = Vector2( 1487.17, 878.333 )
 rotation = -3.14159
 script = SubResource( 11 )
 color = Color( 1, 1, 1, 1 )

@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/Sprites/topdown-zombie-shooter-pack/man-old/manOld_stand.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=4]
+script/source = "extends KinematicBody2D
+
+export var _max_speed = 100.0
+export var _direction = Vector2.ZERO
+
+func _physics_process(_delta) -> void:
+
+	var collision = move_and_collide(_direction * _max_speed * _delta)
+	
+	if (collision != null):
+		_direction *= -1 
+		# TODO: Finish ration to the movement direction.
+"
+
+[sub_resource type="CapsuleShape2D" id=1]
+height = 22.7337
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+void fragment() {
+    vec4 curr_color = texture(TEXTURE,UV); // Get current color of pixel
+
+    if (curr_color.rgb == vec3(65.0/255.0, 65.0/255.0, 65.0/255.0)){
+        COLOR = vec4(204.0/255.0,204.0/255.0,204.0/255.0,1);
+    }
+	else if (curr_color.rgb == vec3(46.0/255.0, 46.0/255.0, 46.0/255.0)){
+        COLOR = vec4(153.0/255.0,153.0/255.0,153.0/255.0,1);
+    }else{
+        COLOR = curr_color;
+    }
+}"
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
+
+[node name="OldScientist" type="KinematicBody2D"]
+script = SubResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Body" type="CollisionShape2D" parent="."]
+position = Vector2( -2.39696, -0.271355 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 3 )
+texture = ExtResource( 1 )

@@ -25,8 +25,9 @@ Global="*res://src/global.gd"
 
 [display]
 
-window/size/width=1366
-window/size/height=768
+window/size/width=1920
+window/size/height=1080
+window/size/fullscreen=true
 
 [gdnative]
 
@@ -104,6 +105,5 @@ debugger_agent/wait_timeout=10000
 
 [rendering]
 
-quality/driver/driver_name="GLES2"
 quality/2d/use_pixel_snap=true
 environment/default_environment="res://default_env.tres"
