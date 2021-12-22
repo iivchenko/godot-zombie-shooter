@@ -1,0 +1,28 @@
+name: Build And Export
+
+on:
+  push:
+    branches: [ master, develop ]
+
+jobs:
+  Godot:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        platform: [ win64 ]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          lfs: true
+      - name: Build
+        id: build
+        uses: josephbmanley/build-godot-action@v1.4.1
+        with:
+          name: example
+          preset: ${{ matrix.platform }}
+          debugMode: "true"
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: godot-zombie-shooter-${{ matrix.platform }}
+          path: ${{ github.workspace }}/${{ steps.build.outputs.build }}
