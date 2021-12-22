@@ -13,7 +13,7 @@ function Download-Godot {
 
 function Download-SeverGodot {
 	New-Item -ItemType Directory -Force -Path $out
-    wget -Uri $serverurl -OutFile "$out/godot.zip"
+    Invoke-WebRequest -Uri $serverurl -OutFile "$out/godot.zip"
     expand-archive -path "$out/godot.zip" -DestinationPath $out 
     Rename-Item -Path "$out/Godot_v3.2.1-stable_linux_headless.64"  -NewName "godot"
     Remove-Item "$out/godot.zip"
