@@ -13,7 +13,7 @@ jobs:
       - name: Export
         shell: pwsh
         run: | 
-            Import-Module .\game.psm1 |
+            Import-Module .\game.psm1
             Run-ServerExport
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
