@@ -1,22 +1,22 @@
 ﻿$url = "https://downloads.tuxfamily.org/godotengine/3.2.1/Godot_v3.2.1-stable_win64.exe.zip"
 $serverurl="https://downloads.tuxfamily.org/godotengine/3.2.1/Godot_v3.2.1-stable_linux_headless.64.zip"
-$out = ".\.tools"
+$out = "./.tools"
 
 function Download-Godot {
 
     New-Item -ItemType Directory -Force -Path $out
-    wget -Uri $url -OutFile "$out\godot.zip"
-    expand-archive -path "$out\godot.zip" -DestinationPath $out 
-    Rename-Item -Path "$out\Godot_v3.2.1-stable_win64.exe"  -NewName "godot.exe"
-    Remove-Item "$out\godot.zip"
+    wget -Uri $url -OutFile "$out/godot.zip"
+    expand-archive -path "$out/godot.zip" -DestinationPath $out 
+    Rename-Item -Path "$out/Godot_v3.2.1-stable_win64.exe"  -NewName "godot.exe"
+    Remove-Item "$out/godot.zip"
 }
 
 function Download-SeverGodot {
 	New-Item -ItemType Directory -Force -Path $out
-    wget -Uri $serverurl -OutFile "$out\godot.zip"
-    expand-archive -path "$out\godot.zip" -DestinationPath $out 
-    Rename-Item -Path "$out\Godot_v3.2.1-stable_linux_headless.64"  -NewName "godot"
-    Remove-Item "$out\godot.zip"
+    wget -Uri $serverurl -OutFile "$out/godot.zip"
+    expand-archive -path "$out/godot.zip" -DestinationPath $out 
+    Rename-Item -Path "$out/Godot_v3.2.1-stable_linux_headless.64"  -NewName "godot"
+    Remove-Item "$out/godot.zip"
 }
 
 function Run-Editor {
@@ -60,15 +60,12 @@ function Run-Export {
 
 function Run-ServerExport {
     param()
+        
+	Download-SeverGodot
+	
+    New-Item -ItemType Directory -Force -Path ./publish/winx64
 
-    if (-not (Test-Path -Path "$out\godot.exe"))
-    {
-        Download-SeverGodot        
-    }
-
-    New-Item -ItemType Directory -Force -Path .\publish\winx64\
-
-    & "$out\godot" --path . --export "win-x64" .\publish\winx64\zobmies.exe
+    & "$out\godot" --path . --export "win-x64" ./publish/winx64/zobmies.exe
 }
 
 function Run-Tests {
